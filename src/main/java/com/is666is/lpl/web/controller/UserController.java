@@ -21,7 +21,6 @@ public class UserController {
         try {
             userService.getUser(user);
         }catch (RuntimeException ex){
-            System.out.println("盛世嫡妃");
             model.addAttribute("ex",ex.getMessage());
             return "/devlogin.jsp";
         }
