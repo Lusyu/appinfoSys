@@ -59,4 +59,5 @@
       </div>
     </div>
   </body>
+  <% session.invalidate();%>
 </html>

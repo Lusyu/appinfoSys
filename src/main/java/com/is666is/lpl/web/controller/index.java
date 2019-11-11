@@ -16,4 +16,13 @@ public class index {
     public  String main(){
         return  "/developer/main.jsp";
     }
+    @RequestMapping("/appinfolist")//转发到开发者的查询app页面
+    public  String appinfolist(){
+        return  "/developer/appinfolist.jsp";
+    }
+
+    @RequestMapping("appinfoadd")//转发到开发者的保存app页面
+    public  String appinfoadd(){
+        return  "/developer/appinfoadd.jsp";
+    }
 }
