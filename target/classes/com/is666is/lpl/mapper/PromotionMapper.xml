@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.is666is.lpl.mapper.PromotionMapper">
+  <resultMap id="BaseResultMap" type="com.is666is.lpl.domain.Promotion">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="appId" jdbcType="BIGINT" property="appId" />
+    <result column="adPicPath" jdbcType="VARCHAR" property="adPicPath" />
+    <result column="adPV" jdbcType="BIGINT" property="adPV" />
+    <result column="carouselPosition" jdbcType="INTEGER" property="carouselPosition" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
+    <result column="creationDate" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `ad_promotion`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.is666is.lpl.domain.Promotion" useGeneratedKeys="true">
+    insert into `ad_promotion` (appId, adPicPath, adPV, 
+      carouselPosition, startTime, endTime, 
+      createdBy, creationDate, modifyBy, 
+      modifyDate)
+    values (#{appId,jdbcType=BIGINT}, #{adPicPath,jdbcType=VARCHAR}, #{adPV,jdbcType=BIGINT}, 
+      #{carouselPosition,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{createdBy,jdbcType=BIGINT}, #{creationDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, 
+      #{modifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.is666is.lpl.domain.Promotion">
+    update `ad_promotion`
+    set appId = #{appId,jdbcType=BIGINT},
+      adPicPath = #{adPicPath,jdbcType=VARCHAR},
+      adPV = #{adPV,jdbcType=BIGINT},
+      carouselPosition = #{carouselPosition,jdbcType=INTEGER},
+      startTime = #{startTime,jdbcType=TIMESTAMP},
+      endTime = #{endTime,jdbcType=TIMESTAMP},
+      createdBy = #{createdBy,jdbcType=BIGINT},
+      creationDate = #{creationDate,jdbcType=TIMESTAMP},
+      modifyBy = #{modifyBy,jdbcType=BIGINT},
+      modifyDate = #{modifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, appId, adPicPath, adPV, carouselPosition, startTime, endTime, createdBy, 
+    creationDate, modifyBy, modifyDate
+    from `ad_promotion`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, appId, adPicPath, adPV, carouselPosition, startTime, endTime, createdBy, 
+    creationDate, modifyBy, modifyDate
+    from `ad_promotion`
+  </select>
+</mapper>

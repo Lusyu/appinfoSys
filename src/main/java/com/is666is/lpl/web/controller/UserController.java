@@ -17,7 +17,7 @@ public class UserController {
     @Resource(name ="userService")
     private UserService userService;
     @RequestMapping(value = "/login")
-    public String login(User user, Model model, HttpServletRequest request, HttpServletResponse response){
+    public String login(User user, Model model){
         try {
             userService.getUser(user);
         }catch (RuntimeException ex){

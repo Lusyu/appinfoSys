@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.is666is.lpl.mapper.CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.is666is.lpl.domain.Category">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="categoryCode" jdbcType="VARCHAR" property="categoryCode" />
+    <result column="categoryName" jdbcType="VARCHAR" property="categoryName" />
+    <result column="parentId" jdbcType="BIGINT" property="parentId" />
+    <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
+    <result column="creationTime" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `app_category`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.is666is.lpl.domain.Category" useGeneratedKeys="true">
+    insert into `app_category` (categoryCode, categoryName, parentId, 
+      createdBy, creationTime, modifyBy, 
+      modifyDate)
+    values (#{categoryCode,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
+      #{createdBy,jdbcType=BIGINT}, #{creationTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, 
+      #{modifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.is666is.lpl.domain.Category">
+    update `app_category`
+    set categoryCode = #{categoryCode,jdbcType=VARCHAR},
+      categoryName = #{categoryName,jdbcType=VARCHAR},
+      parentId = #{parentId,jdbcType=BIGINT},
+      createdBy = #{createdBy,jdbcType=BIGINT},
+      creationTime = #{creationTime,jdbcType=TIMESTAMP},
+      modifyBy = #{modifyBy,jdbcType=BIGINT},
+      modifyDate = #{modifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, categoryCode, categoryName, parentId, createdBy, creationTime, modifyBy, 
+    modifyDate
+    from `app_category`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, categoryCode, categoryName, parentId, createdBy, creationTime, modifyBy, 
+    modifyDate
+    from `app_category`
+  </select>
+</mapper>
