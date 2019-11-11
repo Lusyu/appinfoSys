@@ -6,16 +6,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class MD5Utils {
-	/**
-	 * Ê¹ÓÃmd5µÄËã·¨½øÐÐ¼ÓÃÜ
-	 */
+
 	public static String md5(String plainText) {
 		byte[] secretBytes = null;
 		try {
 			secretBytes = MessageDigest.getInstance("md5").digest(
 					plainText.getBytes());
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException("Ã»ÓÐmd5Õâ¸öËã·¨£¡");
+			throw new RuntimeException("Ã»ï¿½ï¿½md5ï¿½ï¿½ï¿½ï¿½ã·¨ï¿½ï¿½");
 		}
 		String md5code = new BigInteger(1, secretBytes).toString(16);
 		for (int i = 0; i < 32 - md5code.length(); i++) {
