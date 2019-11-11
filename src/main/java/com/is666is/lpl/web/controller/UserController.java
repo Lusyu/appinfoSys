@@ -24,6 +24,6 @@ public class UserController {
             model.addAttribute("ex",ex.getMessage());
             return "/devlogin.jsp";
         }
-        return "s";
+        return "sada";
     }
 }
