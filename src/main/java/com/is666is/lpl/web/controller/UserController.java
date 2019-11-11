@@ -24,6 +24,6 @@ public class UserController {
             model.addAttribute("ex",ex.getMessage());
             return "/devlogin.jsp";
         }
-        return "sada";
+        return "redirect:/index/main";//重定向到到处理主页的页面
     }
 }

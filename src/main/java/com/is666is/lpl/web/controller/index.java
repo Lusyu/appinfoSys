@@ -8,9 +8,12 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("/index")
 public class index {
-    @RequestMapping("/login")
+    @RequestMapping("/login")//转发到登录
     public  String login(){
-        System.out.println("你火花塞安定");
         return  "/devlogin.jsp";
+    }
+    @RequestMapping("/main")//转发到开发者的主页
+    public  String main(){
+        return  "/developer/main.jsp";
     }
 }
