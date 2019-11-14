@@ -71,7 +71,7 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">三级分类</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
         						<select name="queryCategoryLevel3" id="queryCategoryLevel3" class="form-control">
-									   <%--<option value="">--请选择--</option>--%>
+									 <%-- <option value="">--请选择--</option>--%>
         						</select>
 							</div>
 						</div>
@@ -249,7 +249,7 @@
 					$.each(vals,function () {
 						if(this.parentId<10){//一级分类
 							classificationOne.push(this);
-							$("#queryCategoryLevel1").append(" <option value='"+this.id+"' index='"+this.parentId+"'>"+this.categoryName+"</option>");
+							$("#queryCategoryLevel1").append("<option value='"+this.parentId+"'>"+this.categoryName+"</option>");
 						}else if(this.parentId<100) {//二级分类
 							classificationTwo.push(this);
 						}else  if(this.parentId<1000){//三级分类
@@ -261,27 +261,62 @@
 
 		//当一级分类改变下拉框 并且index为-1的时候删除二级和三级的下拉框 然后添加二三级提示
         $("#queryCategoryLevel1").change(function () {
-            select("#queryCategoryLevel2","#queryCategoryLevel3",$(this).val());
+            select1("#queryCategoryLevel2","#queryCategoryLevel3",$(this).val());
         });
-		select("#queryCategoryLevel2","#queryCategoryLevel3",-1);
-		function select(categorylevel2list,categoryLevel3List,index){
-			alert(index);
-			if (index==-1){
-
-				$(categorylevel2list).children("option").remove();
-				$(categoryLevel3List).children("option").remove();
-                alert(11);
-/*				selectRemove(categorylevel2list);
-				selectRemove(categoryLevel3List);*/
-				selectAdd(categorylevel2list,"请先选择一级");
-				selectAdd(categoryLevel3List,"请先选择二级");
+		select1("#queryCategoryLevel2","#queryCategoryLevel3",-1);
+/*----------当一级分类没有做选择的时候  二级和三级分别是默认状态-------------*/
+		function select1(categorylevel2list,categoryLevel3List,index){
+            selectRemove(categorylevel2list);
+            selectRemove(categoryLevel3List);
+            selectAdd(categorylevel2list,"请先选择一级");
+            selectAdd(categoryLevel3List,"请先选择二级");
+			if (index==1||index==2||index==3){//二级下拉框 改变成不是默认状态
+				$("#queryCategoryLevel2").children("option").remove();
+                selectAdd(categorylevel2list,"--请选择--");
+					if (index==2||index==3){//分类 2 和 分类3
+						$.each(classificationTwo,function () {
+							if (index==parseInt(this.parentId.toString().substring(0,1))){
+								selectAddObj("#queryCategoryLevel2",this);
+							}
+						})
+				}else{//全部二级分类
+					$.each(classificationTwo,function () {
+							selectAddObj("#queryCategoryLevel2",this);
+					});
+				}
 			}
 		}
-		function selectRemove(select) {
-			$(select).append("<option value='"+-1+"' index='"+-1+"'>--请选择--</option>")
+
+        //操作二级下拉框
+		$("#queryCategoryLevel2").change(function () {
+			select2("#queryCategoryLevel3",$(this).val());
+		});
+		//操作二级下拉框
+		function  select2(queryCategoryLevel3,index) {
+            selectRemove(queryCategoryLevel3);//删除三级分类下拉框值
+			if(index==-1){//如果二级分类是-1 删除三级分类
+				selectAdd(queryCategoryLevel3,"请先选择二级");//添加默认的下拉框值
+			}else{//如果不是默认 循环判断二级分类对应的三级分类
+				selectAdd(queryCategoryLevel3,"--请选择--");//添加默认的选择下拉框值
+				$.each(classificationThree,function () {// 循环判断二级分类对应的三级分类
+					if (index==parseInt(this.parentId.toString().substring(0,2))){
+						selectAddObj("#queryCategoryLevel3",this);
+					}
+				});
+			}
 		}
-		function selectAdd(select,str) {
-			$(select).append("<option value='"+-2+"' index='"+-2+"'>"+str+"</option>")
+		function selectAddObj(select,obj) {//添加下拉框
+			$(select).append("<option value='"+obj.parentId+"'>"+obj.categoryName+"</option>")
 		}
-	})
+		function selectRemove(select) {//删除下拉框的信息
+			$(select).children("option").remove();
+		}
+		function selectAdd(select,str) {//添加默认的 选择字符
+			$(select).append("<option value='"+-1+"'>"+str+"</option>")
+		}
+	});
+
+
+
+
 </script>
