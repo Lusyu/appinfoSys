@@ -30,13 +30,7 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">APP状态</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<select name="queryStatus" class="form-control">
-									<c:if test="${statusList != null }">
-									   <option value="">--请选择--</option>
-									   <c:forEach var="dataDictionary" items="${statusList}">
-									   		<option <c:if test="${dataDictionary.valueId == queryStatus }">selected="selected"</c:if>
-									   		value="${dataDictionary.valueId}">${dataDictionary.valueName}</option>
-									   </c:forEach>
-									</c:if>
+									  <option value="">--请选择--</option>
         						</select>
 							</div>
 						</div>
@@ -46,13 +40,7 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">所属平台</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<select name="queryFlatformId" class="form-control">
-									<c:if test="${flatFormList != null }">
 									   <option value="">--请选择--</option>
-									   <c:forEach var="dataDictionary" items="${flatFormList}">
-									   		<option <c:if test="${dataDictionary.valueId == queryFlatformId }">selected="selected"</c:if>
-									   		value="${dataDictionary.valueId}">${dataDictionary.valueName}</option>
-									   </c:forEach>
-									</c:if>
         						</select>
 							</div>
 						</div>
@@ -62,13 +50,7 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">一级分类</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<select id="queryCategoryLevel1" name="queryCategoryLevel1" class="form-control">
-									<c:if test="${categoryLevel1List != null }">
-									   <option value="">--请选择--</option>
-									   <c:forEach var="appCategory" items="${categoryLevel1List}">
-									   		<option <c:if test="${appCategory.id == queryCategoryLevel1 }">selected="selected"</c:if>
-									   		value="${appCategory.id}">${appCategory.categoryName}</option>
-									   </c:forEach>
-									</c:if>
+									   <option value="-1" index='-1'>--请选择--</option>
         						</select>
 							</div>
 						</div>
@@ -79,13 +61,7 @@
 							<div class="col-md-6 col-sm-6 col-xs-12">
 							<input type="hidden" name="categorylevel2list" id="categorylevel2list"/>
         						<select name="queryCategoryLevel2" id="queryCategoryLevel2" class="form-control">
-        							<c:if test="${categoryLevel2List != null }">
-									   <option value="">--请选择--</option>
-									   <c:forEach var="appCategory" items="${categoryLevel2List}">
-									   		<option <c:if test="${appCategory.id == queryCategoryLevel2 }">selected="selected"</c:if>
-									   		value="${appCategory.id}">${appCategory.categoryName}</option>
-									   </c:forEach>
-									</c:if>
+									   <%--<option value="">--请选择--</option>--%>
         						</select>
 							</div>
 						</div>
@@ -95,13 +71,7 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">三级分类</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
         						<select name="queryCategoryLevel3" id="queryCategoryLevel3" class="form-control">
-        							<c:if test="${categoryLevel3List != null }">
-									   <option value="">--请选择--</option>
-									   <c:forEach var="appCategory" items="${categoryLevel3List}">
-									   		<option <c:if test="${appCategory.id == queryCategoryLevel3 }">selected="selected"</c:if>
-									   		value="${appCategory.id}">${appCategory.categoryName}</option>
-									   </c:forEach>
-									</c:if>
+									   <%--<option value="">--请选择--</option>--%>
         						</select>
 							</div>
 						</div>
@@ -261,5 +231,57 @@
 </div>
 </div>
 <%@include file="common/footer.jsp"%>
+<%--
 <script src="${pageContext.request.contextPath }/statics/localjs/rollpage.js"></script>
 <script src="${pageContext.request.contextPath }/statics/localjs/appinfolist.js"></script>
+--%>
+<%--<script src="${pageContext.request.contextPath }/statics/jquery-1.8.3.js"></script>--%>
+<script>
+	$(function () {
+		var classificationOne=[];//一级分类
+		var classificationTwo=[];//二级分类
+		var classificationThree=[];//三级分类
+		$.post(
+				"${pageContext.request.contextPath}/category/categorys",
+				{},
+				function (data) {
+					var vals=eval(data);
+					$.each(vals,function () {
+						if(this.parentId<10){//一级分类
+							classificationOne.push(this);
+							$("#queryCategoryLevel1").append(" <option value='"+this.id+"' index='"+this.parentId+"'>"+this.categoryName+"</option>");
+						}else if(this.parentId<100) {//二级分类
+							classificationTwo.push(this);
+						}else  if(this.parentId<1000){//三级分类
+							classificationThree.push(this);
+						}
+					});
+				}
+		)
+
+		//当一级分类改变下拉框 并且index为-1的时候删除二级和三级的下拉框 然后添加二三级提示
+        $("#queryCategoryLevel1").change(function () {
+            select("#queryCategoryLevel2","#queryCategoryLevel3",$(this).val());
+        });
+		select("#queryCategoryLevel2","#queryCategoryLevel3",-1);
+		function select(categorylevel2list,categoryLevel3List,index){
+			alert(index);
+			if (index==-1){
+
+				$(categorylevel2list).children("option").remove();
+				$(categoryLevel3List).children("option").remove();
+                alert(11);
+/*				selectRemove(categorylevel2list);
+				selectRemove(categoryLevel3List);*/
+				selectAdd(categorylevel2list,"请先选择一级");
+				selectAdd(categoryLevel3List,"请先选择二级");
+			}
+		}
+		function selectRemove(select) {
+			$(select).append("<option value='"+-1+"' index='"+-1+"'>--请选择--</option>")
+		}
+		function selectAdd(select,str) {
+			$(select).append("<option value='"+-2+"' index='"+-2+"'>"+str+"</option>")
+		}
+	})
+</script>
