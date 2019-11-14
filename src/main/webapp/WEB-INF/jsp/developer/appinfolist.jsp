@@ -286,7 +286,6 @@
 				}
 			}
 		}
-
         //操作二级下拉框
 		$("#queryCategoryLevel2").change(function () {
 			select2("#queryCategoryLevel3",$(this).val());
