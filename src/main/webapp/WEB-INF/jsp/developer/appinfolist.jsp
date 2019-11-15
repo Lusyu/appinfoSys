@@ -29,7 +29,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">APP状态</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<select name="queryStatus" class="form-control">
+								<select name="queryStatus" class="form-control" id="queryStatus">
 									  <option value="">--请选择--</option>
         						</select>
 							</div>
@@ -39,7 +39,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">所属平台</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<select name="queryFlatformId" class="form-control">
+								<select name="queryFlatformId" class="form-control" id="queryFlatformId">
 									   <option value="">--请选择--</option>
         						</select>
 							</div>
@@ -315,7 +315,42 @@
 		}
 	});
 
+/*-----------------------------加载所属平台--------------------------------*/
+    $(function () {
+        $.post(
+            "${pageContext.request.contextPath}/dictionary/selectTypeName",
+            {"typeName":"所属平台"},
+            function (data) {
+                $.each(data,function () {
+                    $("#queryFlatformId").append("<option value='"+this.id+"'>"+this.valueName+"</option>");
+                });
+            }
+        );
+        /*-----------------------------加载app状态--------------------------------*/
+        $.post(
+            "${pageContext.request.contextPath}/dictionary/selectTypeName",
+            {"typeName":"APP状态"},
+            function (data) {
+                $.each(data,function () {
+                    $("#queryStatus").append("<option value='"+this.id+"'>"+this.valueName+"</option>");
+                });
+            }
+        );
+    })
 
-
+    $(function () {
+       $.post(
+       		"${pageContext.request.contextPath}/infoController/selectInfo",
+			 {},
+			   function (data) {
+				   $.each(data,function () {
+					  console.log(this.softwareName+" "+this.APKName+" "+this.downloads+" "+this.dictionaryFlatformId.valueName
+							  +" "+this.categoryLevel1.categoryName+" "+this.categoryLevel2.categoryName+" "+this.categoryLevel3.categoryName
+							  +" "+this.dictionaryStatus.valueName+" "+this.downloads+" "+this.version.versionNo
+					  );
+				   });
+			   }
+	   );
+    })
 
 </script>

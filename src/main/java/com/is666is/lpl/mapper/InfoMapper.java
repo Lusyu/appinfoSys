@@ -13,4 +13,6 @@ public interface InfoMapper {
     List<Info> selectAll();
 
     int updateByPrimaryKey(Info record);
+
+    List<Info> selectInfo();
 }

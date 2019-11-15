@@ -72,7 +72,7 @@
 										class="fa fa-chevron-down"></span>
 								</a>
 									<ul class="nav child_menu">
-										<li><a <%--href="javascript:;"--%> href="${pageContext.request.contextPath}/index/appinfolist">APP开发者账户申请</a>
+										<li><a <%--href="javascript:;"--%> href="${pageContext.request.contextPath}/">APP开发者账户申请</a>
 										</li>
 										<li><a href="javascript:;">个人账户信息维护</a>
 										</li>
@@ -81,7 +81,7 @@
 										class="fa fa-chevron-down"></span>
 								</a>
 									<ul class="nav child_menu">
-										<li><a href="${pageContext.request.contextPath }/dev/flatform/app/list">APP维护</a>
+										<li><a href="${pageContext.request.contextPath }/index/appinfolist">APP维护</a>
 										</li>
 									</ul></li>
 							</ul>
@@ -90,7 +90,6 @@
 
 					</div>
 					<!-- /sidebar menu -->
-
 					<!-- /menu footer buttons -->
 					<div class="sidebar-footer hidden-small">
 						<a data-toggle="tooltip" data-placement="top" title="Settings">

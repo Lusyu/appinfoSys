@@ -45,4 +45,7 @@
     modifyDate
     from `app_category`
   </select>
+  <select id="selectInfoId" resultMap="BaseResultMap">
+    SELECT * FROM app_category where parentId=#{categoryLevel}
+  </select>
 </mapper>

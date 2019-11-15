@@ -13,4 +13,7 @@ public interface DictionaryMapper {
     List<Dictionary> selectAll();
 
     int updateByPrimaryKey(Dictionary record);
+    List<Dictionary> selectTypeName(String typeName);
+
+    Dictionary selectInfoId(Long status);
 }

@@ -28,15 +28,15 @@ public class Info {
 
     private String appInfo;
 
-    private Long status;
+    private Dictionary dictionaryStatus=new Dictionary();//列status状态
 
     private Date onSaleDate;
 
     private Date offSaleDate;
 
-    private Long flatformId;
+    private Dictionary dictionaryFlatformId=new Dictionary();//列flatformId所属平台
 
-    private Long categoryLevel3;
+    private Category categoryLevel3=new Category();//列categoryLevel3三级分类
 
     private Long downloads;
 
@@ -48,13 +48,13 @@ public class Info {
 
     private Date modifyDate;
 
-    private Long categoryLevel1;
+    private Category categoryLevel1=new Category();//一级分类
 
-    private Long categoryLevel2;
+    private Category categoryLevel2=new Category();//二级分类
 
     private String logoPicPath;
 
     private String logoLocPath;
 
-    private Long versionId;
+    private Version version=new Version();
 }
