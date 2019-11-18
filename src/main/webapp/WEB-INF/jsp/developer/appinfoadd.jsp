@@ -19,7 +19,7 @@
          </div>
        </div> -->
            <div class="clearfix"></div>
-        <form class="form-horizontal form-label-left" action="appinfoaddsave" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal form-label-left" action="${pageContext.request.contextPath}/infoController/addInfo" method="post" enctype="multipart/form-data">
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">软件名称 <span class="required">*</span>
             </label>
@@ -43,7 +43,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">支持ROM <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="supportROM" class="form-control col-md-7 col-xs-12" name="supportROM" 
+              <input id="supportROM" class="form-control col-md-7 col-xs-12" name="supportROM"
               	data-validate-length-range="20" data-validate-words="1"   required="required"
               	placeholder="请输入支持的ROM" type="text">
             </div>
@@ -78,35 +78,39 @@
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="select">所属平台 <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <select name="flatformId" id="flatformId" class="form-control"   required="required"></select>
+              <select name="dictionaryFlatformId.id" id="flatformId" class="form-control"   required="required">
+                      <option value="-1">--请选择--</option>
+              </select>
             </div>
           </div>
           
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="select">一级分类 <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <select name="categoryLevel1" id="categoryLevel1" class="form-control"   required="required"> </select>
+              <select name="categoryLevel1.parentId" id="categoryLevel1" class="form-control"   required="required">
+                <option value="-1">--请选择--</option>
+              </select>
             </div>
           </div>
           
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="select">二级分类 <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <select name="categoryLevel2" id="categoryLevel2" class="form-control"  required="required"></select>
+              <select name="categoryLevel2.parentId" id="categoryLevel2" class="form-control"  required="required"></select>
             </div>
           </div>
           
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="select">三级分类 <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <select name="categoryLevel3" id="categoryLevel3" class="form-control"  required="required"></select>
+              <select name="categoryLevel3.parentId" id="categoryLevel3" class="form-control"  required="required"></select>
             </div>
           </div>
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">APP状态 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-            	<input type="hidden" name="status" id="status" value="1">待审核
+            	<input type="hidden" name="status" id="dictionaryStatus.id" value="1">待审核
             </div>
           </div>
           <div class="item form-group">
@@ -121,7 +125,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">LOGO图片 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="file" class="form-control col-md-7 col-xs-12" name="a_logoPicPath"  required="required" id="a_logoPicPath"/>
+            <input type="file" class="form-control col-md-7 col-xs-12" name="logo"  required="required" id="a_logoPicPath"/>
             ${fileUploadError }
             </div>
           </div>
@@ -139,4 +143,112 @@
   </div>
 </div>
 <%@include file="common/footer.jsp"%>
-<script src="${pageContext.request.contextPath }/statics/localjs/appinfoadd.js"></script>
+<%--
+<script src="${pageContext.request.contextPath }/statics/localjs/appinfoadd.js"></script>--%>
+<script src="${pageContext.request.contextPath }/statics/jquery-1.8.3.js"></script>
+<script>
+
+  $(function () {
+    var classificationOne=[];//一级分类
+    var classificationTwo=[];//二级分类
+    var classificationThree=[];//三级分类
+    $.post(
+            "${pageContext.request.contextPath}/category/categorys",
+            {},
+            function (data) {
+              var vals=eval(data);
+              $.each(vals,function () {
+                if(this.parentId<10&&this.parentId!=1){//一级分类
+                  classificationOne.push(this);
+                  $("#categoryLevel1").append("<option value='"+this.parentId+"'>"+this.categoryName+"</option>");
+                }else if(this.parentId<100) {//二级分类
+                  classificationTwo.push(this);
+                }else  if(this.parentId<1000){//三级分类
+                  classificationThree.push(this);
+                }
+              });
+            }
+    )
+
+    //当一级分类改变下拉框 并且index为-1的时候删除二级和三级的下拉框 然后添加二三级提示
+    $("#categoryLevel1").change(function () {
+      select1("#categoryLevel2","#categoryLevel3",$(this).val());
+    });
+    select1("#categoryLevel2","#categoryLevel3",-1);
+    /*----------当一级分类没有做选择的时候  二级和三级分别是默认状态-------------*/
+    function select1(categorylevel2list,categoryLevel3List,index){
+      selectRemove(categorylevel2list);
+      selectRemove(categoryLevel3List);
+      selectAdd(categorylevel2list,"请先选择一级");
+      selectAdd(categoryLevel3List,"请先选择二级");
+      if (index==1||index==2||index==3){//二级下拉框 改变成不是默认状态
+        $("#categoryLevel2").children("option").remove();
+        selectAdd(categorylevel2list,"--请选择--");
+        if (index==2||index==3){//分类 2 和 分类3
+          $.each(classificationTwo,function () {
+            if (index==parseInt(this.parentId.toString().substring(0,1))){
+              selectAddObj("#categoryLevel2",this);
+            }
+          })
+        }
+      }
+    }
+    //操作二级下拉框
+    $("#categoryLevel2").change(function () {
+      select2("#categoryLevel3",$(this).val());
+    });
+    //操作二级下拉框
+    function  select2(categoryLevel3,index) {
+      selectRemove(categoryLevel3);//删除三级分类下拉框值
+      if(index==-1){//如果二级分类是-1 删除三级分类
+        selectAdd(categoryLevel3,"请先选择二级");//添加默认的下拉框值
+      }else{//如果不是默认 循环判断二级分类对应的三级分类
+        selectAdd(categoryLevel3,"--请选择--");//添加默认的选择下拉框值
+        $.each(classificationThree,function () {// 循环判断二级分类对应的三级分类
+          if (index==parseInt(this.parentId.toString().substring(0,2))){
+            selectAddObj("#categoryLevel3",this);
+          }
+        });
+      }
+    }
+    function selectAddObj(select,obj) {//添加下拉框
+      $(select).append("<option value='"+obj.parentId+"'>"+obj.categoryName+"</option>")
+    }
+    function selectRemove(select) {//删除下拉框的信息
+      $(select).children("option").remove();
+    }
+    function selectAdd(select,str) {//添加默认的 选择字符
+      $(select).append("<option value='"+-1+"'>"+str+"</option>");
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*-----------------------------加载所属平台--------------------------------*/
+  $(function () {
+    $.post(
+            "${pageContext.request.contextPath}/dictionary/selectTypeName",
+            {"typeName":"所属平台"},
+            function (data) {
+              $.each(data,function () {
+                if ($("#flatformId").val()==this.id){
+                  $("#flatformId").append("<option value='"+this.id+"'selected >"+this.valueName+"</option>");
+                } else {
+                  $("#flatformId").append("<option value='"+this.id+"'>"+this.valueName+"</option>");
+                }
+              });
+            }
+    );
+  });
+</script>

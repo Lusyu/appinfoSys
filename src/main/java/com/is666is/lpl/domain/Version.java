@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @Alias("Version")
 public class Version {
-    private Long id;
+    private Long id=33L;
 
     private Long appId;
 
@@ -35,4 +35,23 @@ public class Version {
     private String apkLocPath;
 
     private String apkFileName;
+
+    @Override
+    public String toString() {
+        return "Version{" +
+                "id=" + id +
+                ", appId=" + appId +
+                ", versionNo='" + versionNo + '\'' +
+                ", versionInfo='" + versionInfo + '\'' +
+                ", publishStatus=" + publishStatus +
+                ", downloadLink='" + downloadLink + '\'' +
+                ", versionSize=" + versionSize +
+                ", createdBy=" + createdBy +
+                ", creationDate=" + creationDate +
+                ", modifyBy=" + modifyBy +
+                ", modifyDate=" + modifyDate +
+                ", apkLocPath='" + apkLocPath + '\'' +
+                ", apkFileName='" + apkFileName + '\'' +
+                '}';
+    }
 }

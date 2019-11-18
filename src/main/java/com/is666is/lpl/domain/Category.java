@@ -14,6 +14,20 @@ public class Category {
 
     private String categoryName;
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", categoryCode='" + categoryCode + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", parentId=" + parentId +
+                ", createdBy=" + createdBy +
+                ", creationTime=" + creationTime +
+                ", modifyBy=" + modifyBy +
+                ", modifyDate=" + modifyDate +
+                '}';
+    }
+
     private Long parentId;
 
     private Long createdBy;

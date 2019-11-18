@@ -36,8 +36,6 @@
             </if>
             <if test="statusId!=-1 and statusId!=null">
                 and status=#{statusId}
-
-
             </if>
             <if test="flatformId!=-1 and flatformId!=null">
                     and flatformId=#{flatformId}
@@ -45,13 +43,11 @@
             <if test="categoryLevel1!=-1 and categoryLevel1!=null">
                 <choose>
                 <when test="categoryLevel1==1">
-
                 </when>
                 <otherwise>
                     and categoryLevel1=#{categoryLevel1}
                 </otherwise>
                 </choose>
-
             </if>
             <if test="categoryLevel2!=-1 and categoryLevel2!=null">
                 and categoryLevel2=#{categoryLevel2}
@@ -61,4 +57,14 @@
             </if>
         </where>
   </select>
+    <insert id="insert" parameterType="Info">
+        INSERT  INTO `app_info`(`id`,`softwareName`,`APKName`,`supportROM`,`interfaceLanguage`,`softwareSize`,`updateDate`,
+                                `devId`,`appInfo`,`status`,`onSaleDate`,`offSaleDate`,`flatformId`,
+                                `categoryLevel3`,`downloads`,`createdBy`,`creationDate`,`modifyBy`,`modifyDate`,
+                                `categoryLevel1`,`categoryLevel2`,`logoPicPath`,`logoLocPath`,`versionId`)
+        VALUES (#{id},#{softwareName},#{APKName},#{supportROM},#{interfaceLanguage},#{softwareSize},#{updateDate},
+                #{devId},#{appInfo},#{dictionaryStatus.id},#{onSaleDate},#{offSaleDate},#{dictionaryFlatformId.id},
+                #{categoryLevel3.parentId},#{downloads},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},
+                #{categoryLevel1.parentId}, #{categoryLevel3.parentId},#{logoPicPath},#{logoLocPath},#{version.id});
+    </insert>
 </mapper>

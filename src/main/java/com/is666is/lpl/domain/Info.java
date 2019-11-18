@@ -28,6 +28,36 @@ public class Info {
 
     private String appInfo;
 
+    @Override
+    public String toString() {
+        return "Info{" +
+                "id=" + id +
+                ", softwareName='" + softwareName + '\'' +
+                ", APKName='" + APKName + '\'' +
+                ", supportROM='" + supportROM + '\'' +
+                ", interfaceLanguage='" + interfaceLanguage + '\'' +
+                ", softwareSize=" + softwareSize +
+                ", updateDate=" + updateDate +
+                ", devId=" + devId +
+                ", appInfo='" + appInfo + '\'' +
+                ", dictionaryStatus=" + dictionaryStatus +
+                ", onSaleDate=" + onSaleDate +
+                ", offSaleDate=" + offSaleDate +
+                ", dictionaryFlatformId=" + dictionaryFlatformId +
+                ", categoryLevel3=" + categoryLevel3 +
+                ", downloads=" + downloads +
+                ", createdBy=" + createdBy +
+                ", creationDate=" + creationDate +
+                ", modifyBy=" + modifyBy +
+                ", modifyDate=" + modifyDate +
+                ", categoryLevel1=" + categoryLevel1 +
+                ", categoryLevel2=" + categoryLevel2 +
+                ", logoPicPath='" + logoPicPath + '\'' +
+                ", logoLocPath='" + logoLocPath + '\'' +
+                ", version=" + version +
+                '}';
+    }
+
     private Dictionary dictionaryStatus=new Dictionary();//列status状态
 
     private Date onSaleDate;

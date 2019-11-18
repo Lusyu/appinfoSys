@@ -26,4 +26,19 @@ public class Dictionary {
     private Long modifyBy;
 
     private Date modifyDate;
- }
+
+    @Override
+    public String toString() {
+        return "Dictionary{" +
+                "id=" + id +
+                ", typeCode='" + typeCode + '\'' +
+                ", typeName='" + typeName + '\'' +
+                ", valueId=" + valueId +
+                ", valueName='" + valueName + '\'' +
+                ", createdBy=" + createdBy +
+                ", creationDate=" + creationDate +
+                ", modifyBy=" + modifyBy +
+                ", modifyDate=" + modifyDate +
+                '}';
+    }
+}

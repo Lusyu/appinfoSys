@@ -14,8 +14,8 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="x_content">
-				<form method="post" action="${pageContext.request.contextPath}/infoController/selectInfo">
-					<input type="hidden" name="pageIndex" value="1" />
+				<form id="form" method="post" action="${pageContext.request.contextPath}/infoController/selectInfo">
+					<input type="hidden" name="currentPage" id="currentPage" value="1" />
 			    <ul>
 					<li>
 						<div class="form-group">
@@ -193,37 +193,37 @@
 				<div class="row">
 					<div class="col-sm-5">
 						<div class="dataTables_info" id="datatable-responsive_info"
-							role="status" aria-live="polite">共${pages.totalCount }条记录
-							${pages.currentPageNo }/${pages.totalPageCount }页</div>
+							role="status" aria-live="polite">共${requestScope.pageInfo.total }条记录
+							${requestScope.pageInfo.pageNum }/${requestScope.pageInfo.pages}页</div>
 					</div>
-					<div class="col-sm-7">
+					<div class="col-sm-7" style="position: relative;top: -30px;">
 						<div class="dataTables_paginate paging_simple_numbers"
 							id="datatable-responsive_paginate">
 							<ul class="pagination">
-								<c:if test="${pages.currentPageNo > 1}">
+								<%--<c:if test="${requestScope.pageInfo.pageNum > 1}">--%>
 									<li class="paginate_button previous"><a
-										href="javascript:page_nav(document.forms[0],1);"
+										href="javascript:page_nav(1)"
 										aria-controls="datatable-responsive" data-dt-idx="0"
 										tabindex="0">首页</a>
 									</li>
 									<li class="paginate_button "><a
-										href="javascript:page_nav(document.forms[0],${pages.currentPageNo-1});"
+										href="javascript:page_nav(${requestScope.pageInfo.pageNum-1>0?requestScope.pageInfo.pageNum-1:1});"
 										aria-controls="datatable-responsive" data-dt-idx="1"
 										tabindex="0">上一页</a>
 									</li>
-								</c:if>
-								<c:if test="${pages.currentPageNo < pages.totalPageCount }">
+								<%--</c:if>--%>
+								<%--<c:if test="${pages.currentPageNo < pages.totalPageCount }">--%>
 									<li class="paginate_button "><a
-										href="javascript:page_nav(document.forms[0],${pages.currentPageNo+1 });"
+										href="javascript:page_nav(${requestScope.pageInfo.pageNum+1<requestScope.pageInfo.pages?requestScope.pageInfo.pageNum+1:requestScope.pageInfo.pages});"
 										aria-controls="datatable-responsive" data-dt-idx="1"
 										tabindex="0">下一页</a>
 									</li>
 									<li class="paginate_button next"><a
-										href="javascript:page_nav(document.forms[0],${pages.totalPageCount });"
+										href="javascript:page_nav(${requestScope.pageInfo.pages});"
 										aria-controls="datatable-responsive" data-dt-idx="7"
 										tabindex="0">最后一页</a>
 									</li>
-								</c:if>
+								<%--</c:if>--%>
 							</ul>
 						</div>
 					</div>
@@ -251,7 +251,12 @@
 					$.each(vals,function () {
 						if(this.parentId<10){//一级分类
 							classificationOne.push(this);
-							$("#queryCategoryLevel1").append("<option value='"+this.parentId+"'>"+this.categoryName+"</option>");
+							if($("#categoryLevel1").val()==this.parentId&&$("#categoryLevel1").val()!=-1){
+                                $("#queryCategoryLevel1").append("<option value='"+this.parentId+"' selected>"+this.categoryName+"</option>");
+                            }else {
+                                $("#queryCategoryLevel1").append("<option value='"+this.parentId+"'>"+this.categoryName+"</option>");
+                            }
+
 						}else if(this.parentId<100) {//二级分类
 							classificationTwo.push(this);
 						}else  if(this.parentId<1000){//三级分类
@@ -315,6 +320,59 @@
 		function selectAdd(select,str) {//添加默认的 选择字符
 			$(select).append("<option value='"+-1+"'>"+str+"</option>");
 		}
+        /*选择二级下拉框*/
+        selectTwo();
+        function selectTwo() {
+            var categoryLevel1=$("#categoryLevel1").val();
+            var categoryLevel2=$("#categoryLevel2").val();
+            var categoryLevel3=$("#categoryLevel3").val();
+            if (parseInt(categoryLevel1)!=-1&&parseInt(categoryLevel1)!=null){
+                selectRemove("#queryCategoryLevel2");
+                selectAdd("#queryCategoryLevel2","--请选择--");
+                var interval=setInterval(function () {
+                    if (classificationTwo.length!=0){//判断异步加载的二级下拉框的json数组是否有值
+                        clearInterval(interval);//有值就清除定时器
+                        $.each(classificationTwo,function () {//遍历循环二级下拉框的json
+                            if (categoryLevel1.toString()==this.parentId.toString().substring(0,1)){//如果一级下拉框值等于二级下拉框的值 就添加二级下拉框
+                                if (parseInt(categoryLevel2)==this.parentId){//看是否上次点击查询是否有选择
+                                    $("#queryCategoryLevel2").append("<option value='"+this.parentId+"' selected>"+this.categoryName+"</option>")
+                                }else {
+                                    selectAddObj("#queryCategoryLevel2",this);//把每个二级下拉框中的值添加到二级下拉框
+                                }
+                            }else if(categoryLevel1==1){
+                                if (parseInt(categoryLevel2)==this.parentId){//看是否上次点击查询是否有选择
+                                    $("#queryCategoryLevel2").append("<option value='"+this.parentId+"' selected>"+this.categoryName+"</option>")
+                                }else {
+                                    selectAddObj("#queryCategoryLevel2",this);
+                                }
+
+                            }
+                        });
+                    }
+                },20)
+            }
+            /*二级下拉框*/
+            if (parseInt(categoryLevel2)!=-1&&parseInt(categoryLevel2)!=null){
+                selectRemove("#queryCategoryLevel3");
+                selectAdd("#queryCategoryLevel3","--请选择--");
+                var interval2=setInterval(function () {
+                    if (classificationThree.length!=0){
+                        clearInterval(interval2);
+                        $.each(classificationThree,function () {
+                            if (categoryLevel2.toString()==this.parentId.toString().substring(0,2)){
+                                if (parseInt(categoryLevel3)==this.parentId){
+                                    $("#queryCategoryLevel3").append("<option value='"+this.parentId+"' selected>"+this.categoryName+"</option>")
+                                }else {
+                                    selectAddObj("#queryCategoryLevel3",this);
+                                }
+                            }
+                        });
+                    }
+                },20)
+            }
+
+        }
+
 	});
 
 /*-----------------------------加载所属平台--------------------------------*/
@@ -324,7 +382,12 @@
             {"typeName":"所属平台"},
             function (data) {
                 $.each(data,function () {
-                    $("#queryFlatformId").append("<option value='"+this.id+"'>"+this.valueName+"</option>");
+                    if ($("#flatformId").val()==this.id){
+                        $("#queryFlatformId").append("<option value='"+this.id+"'selected >"+this.valueName+"</option>");
+                    } else {
+                        $("#queryFlatformId").append("<option value='"+this.id+"'>"+this.valueName+"</option>");
+                    }
+
                 });
             }
         );
@@ -333,10 +396,22 @@
             "${pageContext.request.contextPath}/dictionary/selectTypeName",
             {"typeName":"APP状态"},
             function (data) {
+                ;
                 $.each(data,function () {
-                    $("#queryStatus").append("<option value='"+this.id+"'>"+this.valueName+"</option>");
+                    if ($("#statusId").val()==this.id){
+                        $("#queryStatus").append("<option value='"+this.id+"' selected>"+this.valueName+"</option>");
+                    }else {
+                        $("#queryStatus").append("<option value='"+this.id+"'>"+this.valueName+"</option>");
+                    }
+
                 });
             }
         );
     })
+	function page_nav(page) {
+    	$("#currentPage").val(page);
+		$("#form").submit();
+	}
+
+
 </script>
