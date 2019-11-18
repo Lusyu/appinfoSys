@@ -30,5 +30,35 @@
   </resultMap>
   <select id="selectInfo" resultMap="BaseResultMap">
         select * from app_info
+        <where>
+            <if test="softwareName!=null">
+                    and softwareName like concat('%',#{softwareName},'%')
+            </if>
+            <if test="statusId!=-1 and statusId!=null">
+                and status=#{statusId}
+
+
+            </if>
+            <if test="flatformId!=-1 and flatformId!=null">
+                    and flatformId=#{flatformId}
+            </if>
+            <if test="categoryLevel1!=-1 and categoryLevel1!=null">
+                <choose>
+                <when test="categoryLevel1==1">
+
+                </when>
+                <otherwise>
+                    and categoryLevel1=#{categoryLevel1}
+                </otherwise>
+                </choose>
+
+            </if>
+            <if test="categoryLevel2!=-1 and categoryLevel2!=null">
+                and categoryLevel2=#{categoryLevel2}
+            </if>
+            <if test="categoryLevel3!=-1 and categoryLevel3!=null">
+                and categoryLevel3=#{categoryLevel3}
+            </if>
+        </where>
   </select>
 </mapper>

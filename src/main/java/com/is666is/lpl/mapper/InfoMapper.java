@@ -1,6 +1,8 @@
 package com.is666is.lpl.mapper;
 
 import com.is666is.lpl.domain.Info;
+import com.is666is.lpl.page.InfoConditions;
+
 import java.util.List;
 
 public interface InfoMapper {
@@ -14,5 +16,5 @@ public interface InfoMapper {
 
     int updateByPrimaryKey(Info record);
 
-    List<Info> selectInfo();
+    <T> List<T> selectInfo(InfoConditions<T> infoConditions);
 }

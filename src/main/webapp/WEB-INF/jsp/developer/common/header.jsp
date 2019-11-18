@@ -81,7 +81,7 @@
 										class="fa fa-chevron-down"></span>
 								</a>
 									<ul class="nav child_menu">
-										<li><a href="${pageContext.request.contextPath }/index/appinfolist">APP维护</a>
+										<li><a href="${pageContext.request.contextPath }/infoController/selectInfo">APP维护</a>
 										</li>
 									</ul></li>
 							</ul>
