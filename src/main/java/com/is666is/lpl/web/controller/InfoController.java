@@ -20,10 +20,10 @@ public class InfoController {
     private InfoService infoService;
     @RequestMapping("/selectInfo")
     public String selectInfo(Model model,@ModelAttribute("info")InfoConditions<Info> infoConditions){/*app分页查询*/
-        //System.out.println(infoConditions.getSoftwareName()+"----- "+infoConditions.getStatusId()+"-----  1:"+infoConditions.getCategoryLevel1()+"-----  2:"+infoConditions.getCategoryLevel2()+"-----  3:"+infoConditions.getCategoryLevel3());
+        System.out.println(infoConditions.getSoftwareName()+"----- "+infoConditions.getStatusId()+"-----  1:"+infoConditions.getCategoryLevel1()+"-----  2:"+infoConditions.getCategoryLevel2()+"-----  3:"+infoConditions.getCategoryLevel3());
         PageInfo<Info> infoList = infoService.getInfoList(infoConditions);
         model.addAttribute("pageInfo",infoList);
-       // System.out.println("--------------");
+        System.out.println("--------------");
         return  "developer/appinfolist.jsp";
     }
 }
