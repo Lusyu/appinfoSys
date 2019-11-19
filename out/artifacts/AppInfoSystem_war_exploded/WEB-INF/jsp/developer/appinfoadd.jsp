@@ -110,7 +110,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">APP状态 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-            	<input type="hidden" name="status" id="dictionaryStatus.id" value="1">待审核
+            	<input type="hidden" name="dictionaryStatus.id" id="status" value="6">待审核
             </div>
           </div>
           <div class="item form-group">
@@ -126,7 +126,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="file" class="form-control col-md-7 col-xs-12" name="logo"  required="required" id="a_logoPicPath"/>
-            ${fileUploadError }
+            ${ts}
             </div>
           </div>
           <div class="ln_solid"></div>

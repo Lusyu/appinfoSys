@@ -65,6 +65,6 @@
         VALUES (#{id},#{softwareName},#{APKName},#{supportROM},#{interfaceLanguage},#{softwareSize},#{updateDate},
                 #{devId},#{appInfo},#{dictionaryStatus.id},#{onSaleDate},#{offSaleDate},#{dictionaryFlatformId.id},
                 #{categoryLevel3.parentId},#{downloads},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},
-                #{categoryLevel1.parentId}, #{categoryLevel3.parentId},#{logoPicPath},#{logoLocPath},#{version.id});
+                #{categoryLevel1.parentId}, #{categoryLevel2.parentId},#{logoPicPath},#{logoLocPath},#{version.id});
     </insert>
 </mapper>
