@@ -21,7 +21,7 @@ public class index {
         return  "/developer/appinfolist.jsp";
     }
 
-    @RequestMapping("appinfoadd")//转发到开发者的保存app页面
+    @RequestMapping("/appinfoadd")//转发到开发者的保存app页面
     public  String appinfoadd(){
         return  "/developer/appinfoadd.jsp";
     }

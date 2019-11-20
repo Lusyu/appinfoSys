@@ -1,21 +1,21 @@
 package com.is666is.lpl.web.advice;
 
+import com.is666is.lpl.util.UserContext;
+import org.springframework.http.HttpRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 @ControllerAdvice
 public class HandlerExceptionAdvice {
     @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ModelAndView upload(MaxUploadSizeExceededException me){
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.addObject("ts","文件的大小不能超过100KB");
-        modelAndView.setViewName("developer/appinfoadd.jsp");
-        return  modelAndView;
+    public String upload(MaxUploadSizeExceededException me, HttpRequest request){
+        System.out.println(request.getURI());
+        UserContext.getSession().setAttribute("ts","文件大小不能超过大小100KB");
+        return  "redirect:/index/appinfoadd";
     }
 }

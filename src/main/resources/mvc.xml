@@ -16,8 +16,17 @@
                 <property name="prefix" value="/WEB-INF/jsp/"/>
         </bean>
         <!--配置文件上传-->
-        <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+       <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
                 <property name="defaultEncoding" value="utf-8"/>
                 <property name="maxUploadSize" value="100000"/>
         </bean>
+        <!--配置用户拦截器-->
+       <mvc:interceptors>
+            <mvc:interceptor>
+                <mvc:mapping path="/**"/><!--对所有-->
+                <mvc:exclude-mapping path="/user/login"/>
+                <mvc:exclude-mapping path="/index/login"/>
+                <bean class="com.is666is.lpl.web.interceptor.UserInterceptor"/>
+            </mvc:interceptor>
+        </mvc:interceptors>
 </beans>

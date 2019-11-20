@@ -126,7 +126,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="file" class="form-control col-md-7 col-xs-12" name="logo"  required="required" id="a_logoPicPath"/>
-            ${ts}
+            ${ts}<%session.removeAttribute("ts");%>
             </div>
           </div>
           <div class="ln_solid"></div>
