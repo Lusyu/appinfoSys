@@ -67,4 +67,7 @@
                 #{categoryLevel3.parentId},#{downloads},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},
                 #{categoryLevel1.parentId}, #{categoryLevel2.parentId},#{logoPicPath},#{logoLocPath},#{version.id});
     </insert>
+    <delete id="deleteByPrimaryKey">
+        delete from app_info where id=#{id}
+    </delete>
 </mapper>

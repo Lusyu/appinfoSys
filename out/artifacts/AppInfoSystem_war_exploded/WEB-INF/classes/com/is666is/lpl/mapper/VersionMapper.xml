@@ -59,7 +59,10 @@
     createdBy, creationDate, modifyBy, modifyDate, apkLocPath, apkFileName
     from `app_version`
   </select>
-    <select id="selectInfoId" resultMap="BaseResultMap">
+  <select id="selectInfoId" resultMap="BaseResultMap">
         select * from app_version where id=#{versionId}
-    </select>
+  </select>
+  <delete id="deleteAppId">
+        delete from app_version where appId=#{appId}
+  </delete>
 </mapper>

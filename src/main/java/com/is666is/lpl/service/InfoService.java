@@ -11,4 +11,5 @@ import java.util.List;
 public interface InfoService {
     <T> PageInfo<T> getInfoList(InfoConditions<T> infoConditions);
     void addInfo(Info info, MultipartFile logo, ServletContext servletContext);
+    int deleteAppInfo(Long id);
 }

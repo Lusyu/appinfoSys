@@ -16,10 +16,6 @@
         <!-- 调用方法不要立即加载 -->
         <setting name="lazyLoadTriggerMethods" value="clone" />
     </settings>
-    <!-- 加载package包名下的所有类包括子包的类  用于取别名  在类的上面写@Alias("别名") -->
-    <!--<typeAliases>
-        <package name="com.is666is.lpl.domain"/>
-    </typeAliases>-->
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageInterceptor">
             <property name="helperDialect" value="mysql"/>

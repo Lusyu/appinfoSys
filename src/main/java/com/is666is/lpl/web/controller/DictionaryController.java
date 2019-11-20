@@ -19,7 +19,6 @@ public class DictionaryController {
     @RequestMapping("/selectTypeName")
     @ResponseBody
     public List<Dictionary> selectTypeName(@RequestParam(name = "typeName",required = false)String typeName){
-        System.out.println(111);
         return  dictionaryService.selectTypeName(typeName);
     }
 }

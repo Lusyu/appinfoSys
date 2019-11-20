@@ -24,15 +24,27 @@ public class InfoController {
     private ServletContext servletContext;
     @Resource(name = "infoService")
     private InfoService infoService;
+    //查询App信息
     @RequestMapping("/selectInfo")
     public String selectInfo(Model model,@ModelAttribute("info")InfoConditions<Info> infoConditions){/*app分页查询*/
         PageInfo<Info> infoList = infoService.getInfoList(infoConditions);
         model.addAttribute("pageInfo",infoList);
         return  "developer/appinfolist.jsp";
     }
+    /*保存App信息*/
     @RequestMapping(value = "/addInfo",method = RequestMethod.POST)
     public  String addInfo(Info info, MultipartFile logo){
           infoService.addInfo(info,logo,servletContext);
         return "redirect:/infoController/selectInfo";
+    }
+    //删除appinfo
+    @RequestMapping(value = "/deleteAppInfo")
+    @ResponseBody
+    public Object deleteAppInfo(Long id){
+         if (infoService.deleteAppInfo(id)>0){
+             return  true;
+         }else {
+             return  false;
+         }
     }
 }

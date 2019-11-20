@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @ControllerAdvice
 public class HandlerExceptionAdvice {
     @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public String upload(MaxUploadSizeExceededException me, HttpRequest request){
-        System.out.println(request.getURI());
+    public String upload(MaxUploadSizeExceededException me, HttpServletRequest request){
+        System.out.println(request.getRequestURI());
         UserContext.getSession().setAttribute("ts","文件大小不能超过大小100KB");
         return  "redirect:/index/appinfoadd";
     }

@@ -20,10 +20,10 @@
                 <property name="defaultEncoding" value="utf-8"/>
                 <property name="maxUploadSize" value="100000"/>
         </bean>
-        <!--配置拦截器-->
+        <!--配置用户拦截器-->
        <mvc:interceptors>
             <mvc:interceptor>
-                <mvc:mapping path="/**"/><!--只对文件上传的请求路径做拦截-->
+                <mvc:mapping path="/**"/><!--对所有-->
                 <mvc:exclude-mapping path="/user/login"/>
                 <mvc:exclude-mapping path="/index/login"/>
                 <bean class="com.is666is.lpl.web.interceptor.UserInterceptor"/>

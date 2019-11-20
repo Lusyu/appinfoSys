@@ -18,7 +18,7 @@
     <!--加载db.properties-->
     <context:property-placeholder  location="classpath:db.properties"/>
     <!--创建druid(德罗伊连接池)-->
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="clone">
         <property name="driverClassName" value="${jdbc.diverClassName}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
@@ -34,7 +34,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis.xml"/><!--读取mybatis.xml配置文件-->
         <property name="typeAliasesPackage" value="com.is666is.lpl.domain"/><!--给实体类  起别名-->
-        <property name="mapperLocations" value="classpath:com/is666is/lpl/mapper/*Mapper.xml"/>
+       <property name="mapperLocations" value="classpath:com/is666is/lpl/mapper/*Mapper.xml"/>
     </bean>
     <!--扫描生成mapper接口代理对象-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

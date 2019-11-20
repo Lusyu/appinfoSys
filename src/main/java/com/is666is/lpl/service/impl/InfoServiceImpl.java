@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.is666is.lpl.domain.Info;
 import com.is666is.lpl.domain.User;
 import com.is666is.lpl.mapper.InfoMapper;
+import com.is666is.lpl.mapper.VersionMapper;
 import com.is666is.lpl.page.InfoConditions;
 import com.is666is.lpl.service.InfoService;
 import com.is666is.lpl.util.UserContext;
@@ -29,6 +30,8 @@ import java.util.UUID;
 public class InfoServiceImpl implements InfoService {
     @Autowired
     private InfoMapper infoMapper;
+    @Autowired
+    private VersionMapper versionMapper;
     /*分页查询*/
     @Transactional(readOnly = true)
     public<T> PageInfo<T> getInfoList(InfoConditions<T> infoConditions) {
@@ -52,7 +55,12 @@ public class InfoServiceImpl implements InfoService {
         info.setDevId(user.getId());
         info.setUpdateDate(new Date());
         info.setCreationDate(new Date());
-        System.out.println(info.getCategoryLevel1().getParentId()+" "+info.getCategoryLevel2().getParentId()+" "+info.getCategoryLevel3().getParentId());
         infoMapper.insert(info);
+    }
+
+    @Override
+    public int deleteAppInfo(Long id) {
+        versionMapper.deleteAppId(id);
+        return infoMapper.deleteByPrimaryKey(id);
     }
 }

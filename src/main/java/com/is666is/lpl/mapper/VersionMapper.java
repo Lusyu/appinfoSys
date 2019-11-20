@@ -13,4 +13,6 @@ public interface VersionMapper {
     List<Version> selectAll();
 
     int updateByPrimaryKey(Version record);
+
+    int deleteAppId(Long appId);
 }

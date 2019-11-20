@@ -180,7 +180,7 @@
                                           appinfoid="${appInfo.id }" status="${appInfo.dictionaryStatus.id}" statusname="${appInfo.dictionaryStatus.valueName}"
                                           data-toggle="tooltip" data-placement="top" title="" data-original-title="修改APP基础信息">修改</a></li>
                       <li><a  class="viewApp" appinfoid=${appInfo.id }  data-toggle="tooltip" data-placement="top" title="" data-original-title="查看APP基础信息以及全部版本信息">查看</a></li>
-                      <li><a  class="deleteApp" appinfoid=${appInfo.id }  appsoftwarename=${appInfo.softwareName } data-toggle="tooltip" data-placement="top" title="" data-original-title="删除APP基础信息以及全部版本信息">删除</a></li>
+                      <li><a  class="deleteApp" appinfoid=${appInfo.id }  appsoftwarename=${appInfo.softwareName }  data-toggle="tooltip" data-placement="top" title="" data-original-title="删除APP基础信息以及全部版本信息">删除</a></li>
                     </ul>
                 </div>
                                     </td>
@@ -413,5 +413,31 @@
 		$("#form").submit();
 	}
 
+	/*------------------------删除操作------------------------*/
+	$(function () {
+		var tr=null;
+		$(".deleteApp").click(function () {
+			var id=$(this).attr("appinfoid");
+			var name=$(this).parent().parent().parent().parent().parent().children("td").eq(0).text();
+			tr=$(this).parent().parent().parent().parent().parent();
+			var bol=confirm("确定要删除:"+name+"吗?"+id);
+			if (!bol){
+				return;
+			}
+			$.post(
+					"${pageContext.request.contextPath}/infoController/deleteAppInfo",
+					{"id":id},
+					function (data) {
+						if (data==true){
+							tr.remove();
+							alert("删除成功: "+name);
+						}else{
+							alert("删除失败!");
+						}
+
+					}
+			);
+		});
+	});
 
 </script>
