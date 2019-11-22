@@ -232,6 +232,7 @@
 
 		</div>
 	</div>
+    <input type="hidden" value="${sessionScope.ts}" id="ts"/><%session.removeAttribute("ts");%>
 </div>
 </div>
 <%@include file="common/footer.jsp"%>
@@ -239,7 +240,13 @@
 <script src="${pageContext.request.contextPath }/statics/localjs/appinfolist.js"></script>
 <%--<script src="${pageContext.request.contextPath }/statics/jquery-1.8.3.js"></script>--%>
 <script>
+    function sessionScopeTs(){
+        if ($("#ts").val()!=null&&$("#ts").val()!=""){
+            alert($("#ts").val());
+        }
+    }
 	$(function () {
+        sessionScopeTs();
 		var classificationOne=[];//一级分类
 		var classificationTwo=[];//二级分类
 		var classificationThree=[];//三级分类
@@ -370,9 +377,7 @@
                     }
                 },20)
             }
-
         }
-
 	});
 
 /*-----------------------------加载所属平台--------------------------------*/
@@ -412,6 +417,14 @@
     	$("#currentPage").val(page);
 		$("#form").submit();
 	}
+    /*------------------------新增版本操作------------------------*/
+    $(".addVersion").click(function () {
+        var id=$(this).attr("appinfoid");
+        if (id!=null&&id!=""){
+            window.location.href="${pageContext.request.contextPath}/vcersion/selectVersions?id="+id;
+        }
+    });
+
 
 	/*------------------------删除操作------------------------*/
 	$(function () {
@@ -420,7 +433,7 @@
 			var id=$(this).attr("appinfoid");
 			var name=$(this).parent().parent().parent().parent().parent().children("td").eq(0).text();
 			tr=$(this).parent().parent().parent().parent().parent();
-			var bol=confirm("确定要删除:"+name+"吗?"+id);
+			var bol=confirm("确定要删除:"+name+"吗?");
 			if (!bol){
 				return;
 			}
@@ -434,10 +447,51 @@
 						}else{
 							alert("删除失败!");
 						}
-
 					}
 			);
 		});
+/*------------------------执行下架操作和上架操作------------------*/
+		var td=null;
+		var a=null;
+		$(".saleSwichOpen,.saleSwichClose").click(function () {
+			var sale=$(this).attr("saleSwitch");
+			var id=$(this).attr("appinfoid");
+			a=$(this);
+			var name=$(this).parent().parent().parent().parent().parent().children("td").eq(0).text();
+			td=$(this).parent().parent().parent().parent().parent().children("td").eq(5);
+			var bol=confirm("软件名称:"+name+" 确定要"+(sale=="open"?"上架吗?":"下架吗?"));
+			if (!bol){
+				return;
+			}
+			$.post(
+					"${pageContext.request.contextPath}/infoController/updateAppInfoStatus",
+					{"id":id,"sale":sale},
+					function (data) {
+						if (data>0){
+							alert("软件名称:"+name+" "+(sale=="open"?"上架成功":"下架成功"));//提示是否上下架成功
+							td.text(sale=="open"?"已上架":"已下架");//如果是open代表是要上架 所以把状态中的字符串修改成已上架
+							a.attr("saleSwitch",sale=="open"?"close":"open");//状态已经是上架后 下次是下架 就修改下拉框中的状态修改
+							a.text(sale=="open"?"下架":"上架");
+						}else {
+							alert("软件名称:"+name+" "+(sale=="open"?"上架失败":"下架失败"));
+						}
+					}
+			);
+		});
+/*-------------------------执行修改AppInfo操作------------------*/
+		$(".modifyAppInfo").click(function () {
+			var status=$(this).attr("status");
+			if(!(status==6||status==8)){
+				var name=$(this).parent().parent().parent().parent().parent().children("td").eq(0).text();
+				var statusName=$(this).parent().parent().parent().parent().parent().children("td").eq(5).text();
+				alert(name+" 状态为【"+statusName+"】,不能修改！")
+				return;
+			}
+			var id=$(this).attr("appinfoid");
+			window.location.href="${pageContext.request.contextPath}/infoController/selectAppInfo?id="+id;
+		});
 	});
+
+
 
 </script>

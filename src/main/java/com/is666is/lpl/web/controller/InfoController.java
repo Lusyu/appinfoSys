@@ -25,11 +25,11 @@ public class InfoController {
     @Resource(name = "infoService")
     private InfoService infoService;
     //查询App信息
-    @RequestMapping("/selectInfo")
+    @RequestMapping(value = "/selectInfo")
     public String selectInfo(Model model,@ModelAttribute("info")InfoConditions<Info> infoConditions){/*app分页查询*/
         PageInfo<Info> infoList = infoService.getInfoList(infoConditions);
         model.addAttribute("pageInfo",infoList);
-        return  "developer/appinfolist.jsp";
+        return  "/developer/appinfolist.jsp";
     }
     /*保存App信息*/
     @RequestMapping(value = "/addInfo",method = RequestMethod.POST)
@@ -46,5 +46,24 @@ public class InfoController {
          }else {
              return  false;
          }
+    }
+    /*修改appinfo的状态上下架*/
+    @RequestMapping(value = "/updateAppInfoStatus",method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateAppInfoStatus(Long id,String sale){
+        return  infoService.updateAppInfoStatus(id,sale);
+    }
+
+    //查询出单个appinfo到修改页面
+    @RequestMapping(value = "/selectAppInfo",method = RequestMethod.GET)
+    public String selectAppInfo(Long id,Model model){
+        model.addAttribute("appInfo",infoService.selectInfo(id));
+        return "/developer/appinfomodify.jsp";
+    }
+    //修改appInfo信息
+    @RequestMapping(value = "updateAppInfo",method = RequestMethod.POST)
+    public  String updateInfo(Info info,MultipartFile logo){
+        infoService.udpateInfo(info,logo);
+        return "redirect:/infoController/selectInfo";
     }
 }

@@ -5,7 +5,8 @@ import lombok.Setter;
 import org.apache.ibatis.type.Alias;
 
 import java.util.Date;
-@Setter @Getter
+@Setter
+@Getter
 @Alias("Category")
 public class Category {
     private Long id;
@@ -37,5 +38,4 @@ public class Category {
     private Long modifyBy;
 
     private Date modifyDate;
-
  }

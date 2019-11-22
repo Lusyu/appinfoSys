@@ -56,16 +56,16 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="appVersion" items="${appVersionList }" varStatus="status">
+							<c:forEach var="version" items="${versions}" varStatus="status">
 								<tr role="row" class="odd">
-									<td tabindex="0" class="sorting_1">${appVersion.appName}</td>
-									<td>${appVersion.versionNo }</td>
-									<td>${appVersion.versionSize }</td>
-									<td>${appVersion.publishStatusName }</td>
+									<td tabindex="0" class="sorting_1">${version.softwareName}</td>
+									<td>${version.versionNo}</td>
+									<td>${version.versionSize}</td>
+									<td>${version.valueName}</td>
 									<td>
-									<a href="${appVersion.downloadLink }">${appVersion.apkFileName }</a>
+									<a href="${version.downloadLink}">${version.apkFileName }</a>
 									</td>
-									<td><fmt:formatDate value="${appVersion.modifyDate }" pattern="yyyy-MM-dd"/></td>
+									<td><fmt:formatDate value="${version.modifyDate}" pattern="yyyy-MM-dd"/></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -84,9 +84,9 @@
         </div>
         <div class="x_content" style="display: block;">
          <br>
-        <form class="form-horizontal form-label-left" action="addversionsave" method="post" enctype="multipart/form-data">
-           <input type="hidden" name="appId" name="appId" value="${appVersion.appId}">
-          <div class="item form-group">
+        <form class="form-horizontal form-label-left" action="${pageContext.request.contextPath}/vcersion/addVersion" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="appId" value="${appId}"/>
+            <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">版本号 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -123,8 +123,8 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">apk文件 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="file" class="form-control col-md-7 col-xs-12" name="a_downloadLink" id="a_downloadLink"  required="required"/>
-            ${fileUploadError }
+            <input type="file" class="form-control col-md-7 col-xs-12" name="apk" id="apk"  required="required"/>
+            <p id="infoApk" style="color: red"></p>
             </div>
           </div>
           <div class="ln_solid"></div>
@@ -141,4 +141,22 @@
   </div>
 </div>
 <%@include file="common/footer.jsp"%>
-<script src="${pageContext.request.contextPath }/statics/localjs/appversionadd.js"></script>
+<%--
+<script src="${pageContext.request.contextPath }/statics/localjs/appversionadd.js"></script>--%>
+<script src="${pageContext.request.contextPath }/statics/jquery-1.8.3.js"></script>
+<script>
+    $(function () {
+        /*验证文件大小及格式*/
+        $("#send").click(function () {
+                var size=$("#apk")[0].files[0].size;
+                if (size>100000){
+                    alert("文件不能超过100KB");
+                    return false;
+                }
+            return true;
+        });
+        $("#back").click(function () {
+            window.history.go(-1);
+        });
+    })
+</script>

@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
+import javax.xml.crypto.Data;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -57,10 +59,46 @@ public class InfoServiceImpl implements InfoService {
         info.setCreationDate(new Date());
         infoMapper.insert(info);
     }
-
+    /*删除appinfo*/
     @Override
     public int deleteAppInfo(Long id) {
         versionMapper.deleteAppId(id);
         return infoMapper.deleteByPrimaryKey(id);
     }
+    /*修改appinfo 的上下架*/
+    @Override
+    public int updateAppInfoStatus(Long id,String sale) {
+        Long status="open".equals(sale)?9L:10L;
+        return infoMapper.updateAppInfoStatus(id,status,new Date());
+    }
+    /*查询指定appinfo信息*/
+    @Transactional(readOnly = true)
+    public Info selectInfo(Long id) {
+        return infoMapper.selectByPrimaryKey(id);
+    }
+
+    //修改info信息
+    @Override
+    public void udpateInfo(Info info, MultipartFile logo) {
+        if (!"".equals(logo.getOriginalFilename())){
+            File deleteFile=new File(info.getLogoLocPath());
+            deleteFile.delete();
+            String path=UserContext.getSession().getServletContext().getRealPath("/statics/images");
+            String imagName=UUID.randomUUID()+"."+FilenameUtils.getExtension(logo.getOriginalFilename());
+            String logoPicPath="statics/images/"+imagName;
+            String logoLocPath=path+"\\"+imagName;
+            try {
+                Files.copy(logo.getInputStream(),Paths.get(path,imagName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            info.setLogoPicPath(logoPicPath);
+            info.setLogoLocPath(logoLocPath);
+        }
+        info.setUpdateDate(new Date());
+        info.setModifyBy(((User)(UserContext.getCurrentUser())).getId());
+        info.setModifyDate(new Date());
+        infoMapper.updateAppInfo(info);
+    }
+
 }

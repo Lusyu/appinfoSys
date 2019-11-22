@@ -125,7 +125,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">LOGO图片 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="file" class="form-control col-md-7 col-xs-12" name="logo"  required="required" id="a_logoPicPath"/>
+            <input type="file" class="form-control col-md-7 col-xs-12" name="logo"  required="required" id="logo"/>
             ${ts}<%session.removeAttribute("ts");%>
             </div>
           </div>
@@ -147,6 +147,25 @@
 <script src="${pageContext.request.contextPath }/statics/localjs/appinfoadd.js"></script>--%>
 <script src="${pageContext.request.contextPath }/statics/jquery-1.8.3.js"></script>
 <script>
+  $("#send").click(function () {
+    var bol=$("#logo").attr("required");
+      var imgIndex=$("#logo").val().lastIndexOf(".");
+      var imgFormat=$("#logo").val().substring(imgIndex);
+      if(!(imgFormat==".jpg"||imgFormat==".png"||imgFormat==".jpeg"||imgFormat==".pneg")){
+        alert("图片格式不正确!");
+        return  false;
+      }
+      var size=$("#logo")[0].files[0].size;
+      if (size>100000){
+        alert("文件不能超过100KB");
+        return false;
+      }
+    return true;
+  });
+
+
+
+
 
   $(function () {
     var classificationOne=[];//一级分类
@@ -223,16 +242,9 @@
   });
 
 
-
-
-
-
-
-
-
-
-
-
+  $("#back").click(function () {
+    window.history.go(-1);
+  });
 
 
   /*-----------------------------加载所属平台--------------------------------*/

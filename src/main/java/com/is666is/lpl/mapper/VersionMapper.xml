@@ -59,10 +59,21 @@
     createdBy, creationDate, modifyBy, modifyDate, apkLocPath, apkFileName
     from `app_version`
   </select>
+  <!--根据APPinfo的id查询出版本最高的版本-->
   <select id="selectInfoId" resultMap="BaseResultMap">
-        select * from app_version where id=#{versionId}
+        SELECT * FROM app_version WHERE id=(SELECT MAX(id) FROM app_version WHERE appId=#{id})
   </select>
   <delete id="deleteAppId">
         delete from app_version where appId=#{appId}
   </delete>
+  <select id="getAppInfoVersion" parameterType="long" resultType="map">
+    SELECT i.softwareName,v.versionNo,v.versionSize,d.valueName,v.downloadLink,v.modifyDate,v.apkFileName
+    FROM app_version v INNER JOIN app_info i ON v.appId=i.id
+    INNER JOIN data_dictionary d ON d.valueId=v.publishStatus
+    WHERE v.appId =#{id} AND d.typeCode='PUBLISH_STATUS'  ORDER BY v.creationDate DESC LIMIT 0,3
+  </select>
+  <insert id="addVersion" parameterType="Version">
+      INSERT  INTO `app_version`(`appId`,`versionNo`,`versionInfo`,`publishStatus`,`downloadLink`,`versionSize`,`createdBy`,`creationDate`,`modifyBy`,`modifyDate`,`apkLocPath`,`apkFileName`)
+      VALUES(#{appId},#{versionNo},#{versionInfo},#{publishStatus},#{downloadLink},#{versionSize},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},#{apkLocPath},#{apkFileName})
+  </insert>
 </mapper>

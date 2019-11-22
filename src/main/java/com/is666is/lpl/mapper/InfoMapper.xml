@@ -25,7 +25,7 @@
     <association property="categoryLevel1" javaType="Category" select="com.is666is.lpl.mapper.CategoryMapper.selectInfoId" column="categoryLevel1" fetchType="eager"/>
     <association property="categoryLevel2" javaType="Category" select="com.is666is.lpl.mapper.CategoryMapper.selectInfoId" column="categoryLevel2" fetchType="eager"/>
     <association property="categoryLevel3" javaType="Category" select="com.is666is.lpl.mapper.CategoryMapper.selectInfoId" column="categoryLevel3" fetchType="eager"/>
-    <association property="version" javaType="Version" select="com.is666is.lpl.mapper.VersionMapper.selectInfoId" column="versionId" fetchType="eager"/>
+    <association property="version" javaType="Version" select="com.is666is.lpl.mapper.VersionMapper.selectInfoId" column="id" fetchType="eager"/>
 
   </resultMap>
   <select id="selectInfo" resultMap="BaseResultMap">
@@ -67,7 +67,30 @@
                 #{categoryLevel3.parentId},#{downloads},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},
                 #{categoryLevel1.parentId}, #{categoryLevel2.parentId},#{logoPicPath},#{logoLocPath},#{version.id});
     </insert>
+    <!--删除APPinfo-->
     <delete id="deleteByPrimaryKey">
         delete from app_info where id=#{id}
     </delete>
+    <!--修改appinfo的状态-->
+    <update id="updateAppInfoStatus">
+        update app_info set status=#{status}
+            <if test="status==9L">
+                ,onSaleDate=#{date}
+            </if>
+            <if test="status==10L">
+                ,offSaleDate=#{date}
+            </if>
+        where id=#{id}
+    </update>
+    <!--根据id查询appinfo-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select * from app_info where id=#{id}
+    </select>
+    <update id="updateAppInfo" parameterType="Info">
+        UPDATE app_info SET softwareName=#{softwareName},supportROM=#{supportROM},interfaceLanguage=#{interfaceLanguage},
+        softwareSize=#{softwareSize},updateDate=#{updateDate},appInfo=#{appInfo},status=#{dictionaryStatus.id},flatformId=#{dictionaryFlatformId.id},
+        categoryLevel3=#{categoryLevel3.parentId},downloads=#{downloads},modifyBy=#{modifyBy},modifyDate=#{modifyDate},
+        categoryLevel1=#{categoryLevel1.parentId},categoryLevel2=#{categoryLevel2.parentId},logoPicPath=#{logoPicPath},logoLocPath=#{logoLocPath}
+        where id=#{id}
+    </update>
 </mapper>

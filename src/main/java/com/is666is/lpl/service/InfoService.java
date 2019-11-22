@@ -12,4 +12,7 @@ public interface InfoService {
     <T> PageInfo<T> getInfoList(InfoConditions<T> infoConditions);
     void addInfo(Info info, MultipartFile logo, ServletContext servletContext);
     int deleteAppInfo(Long id);
+    int updateAppInfoStatus(Long id,String sale);
+    Info selectInfo(Long id);
+    void udpateInfo(Info info,MultipartFile logo);
 }
