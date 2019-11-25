@@ -56,14 +56,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="appVersion" items="${appVersionList }" varStatus="status">
+							<c:forEach var="appVersion" items="${versions}" varStatus="status">
 								<tr role="row" class="odd">
-									<td tabindex="0" class="sorting_1">${appVersion.appName}</td>
+									<td tabindex="0" class="sorting_1">${appVersion.softwareName}</td>
 									<td>${appVersion.versionNo }</td>
 									<td>${appVersion.versionSize }</td>
-									<td>${appVersion.publishStatusName }</td>
+									<td>${appVersion.valueName }</td>
 									<td>
-									<a href="${appVersion.downloadLink }">${appVersion.apkFileName }</a>
+									<a href="${appVersion.downloadLink }">${appVersion.apkFileName}</a>
 									</td>
 									<td><fmt:formatDate value="${appVersion.modifyDate }" pattern="yyyy-MM-dd"/></td>
 								</tr>
@@ -84,14 +84,13 @@
         </div>
         <div class="x_content" style="display: block;">
          <br>
-        <form class="form-horizontal form-label-left" action="appversionmodifysave" method="post" enctype="multipart/form-data">
-           <input type="hidden" name="id" id="id" value="${appVersion.id}">
-           <input type="hidden" name="appId" id="appId" value="${appVersion.appId}">
+        <form class="form-horizontal form-label-left" action="${pageContext.request.contextPath}/vcersion/updateVersion" method="post" enctype="multipart/form-data">
+           <input type="hidden" name="id" id="id" value="${version.id}">
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">版本号 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input class="form-control col-md-7 col-xs-12" value="${appVersion.versionNo }" 
+              <input class="form-control col-md-7 col-xs-12" value="${version.versionNo }"
               type="text" readonly="readonly" id="versionNo" name="versionNo">
             </div>
           </div>
@@ -99,7 +98,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">版本大小 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="number" id="versionSize" name="versionSize" value="${appVersion.versionSize }"  required="required"
+              <input type="number" id="versionSize" name="versionSize" value="${version.versionSize }"  required="required"
               data-validate-minmax="10,500"  placeholder="请输入版本大小，单位为Mb" class="form-control col-md-7 col-xs-12">
             </div>
           </div>
@@ -117,22 +116,23 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
               <textarea id="versionInfo" name="versionInfo" required="required"  
               placeholder="请输入本版本的相关信息，本信息作为该版本的详细信息进行版本介绍。" class="form-control col-md-7 col-xs-12">
-              ${appVersion.versionInfo }</textarea>
+              ${version.versionInfo }</textarea>
             </div>
           </div>
            <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">apk文件 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="hidden" id="downloadLink" name="downloadLink" value="${appVersion.downloadLink}"/>
-            <input type="hidden" id="apkLocPath" name="apkLocPath" value="${appVersion.apkLocPath}"/>
-            <input type="hidden" id="apkFileName" name="apkFileName" value="${appVersion.apkFileName}"/>
-			<div id="uploadfile" style="display: none">
-				<input id="attach" type="file" class="form-control col-md-7 col-xs-12" name="attach">
-				<p><span style="color:red;font-weight: bold;">*注：1、大小不得超过500m.2、文件类型：apk</span></p>
+            <input type="hidden" id="downloadLink" name="downloadLink" value="${version.downloadLink}"/>
+            <input type="hidden" id="apkLocPath" name="apkLocPath" value="${version.apkLocPath}"/>
+            <input type="hidden" id="apkFileName" name="apkFileName" value="${version.apkFileName}"/>
+            <div id="uploadfile" style="display: none">
+				<input id="attach" type="file" class="form-control col-md-7 col-xs-12" name="logo">
+				<p><span style="color:red;font-weight: bold;">*注：1、大小不得超过100kb.2、文件类型：apk</span></p>
 			</div>
-			<div id="apkFile"></div>
-			${fileUploadError }
+			<div id="apkFile">
+                <a>${version.apkFileName}</a>&nbsp;&nbsp;<a href="${version.downloadLink}">下载</a>&nbsp;&nbsp;<a href="#" id="deleteApk">删除</a>
+            </div>
             </div>
           </div>
           <div class="ln_solid"></div>
@@ -151,4 +151,30 @@
   </div>
 </div>
 <%@include file="common/footer.jsp"%>
-<script src="${pageContext.request.contextPath }/statics/localjs/appversionmodify.js"></script>
+<%--
+<script src="${pageContext.request.contextPath }/statics/localjs/appversionmodify.js"></script>--%>
+
+<script src="${pageContext.request.contextPath }/statics/jquery-1.8.3.js"></script>
+<script>
+    $(function () {
+            $("#deleteApk").click(function () {
+                $(this).parent().hide();
+                $(this).parent().prev().children("input[type=file]").attr("required",true);
+                $(this).parent().prev().show();
+            });
+            $("#send").click(function () {
+               var req= $("#attach").attr("required");
+               if (req!="required"){
+                   return;
+               }
+               var fileSize=$("#attach")[0].files[0].size;
+               if (fileSize>100000){
+                   alert("文件大小不得超过100kb");
+                   return false;
+               }
+            });
+            $("#back").click(function () {
+                window.location.href="${pageContext.request.contextPath}/infoController/selectInfo"
+            });
+    });
+</script>

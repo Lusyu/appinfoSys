@@ -241,9 +241,11 @@
 <%--<script src="${pageContext.request.contextPath }/statics/jquery-1.8.3.js"></script>--%>
 <script>
     function sessionScopeTs(){
-        if ($("#ts").val()!=null&&$("#ts").val()!=""){
-            alert($("#ts").val());
-        }
+    	setTimeout(function () {
+			if ($("#ts").val()!=null&&$("#ts").val()!=""){
+				alert($("#ts").val());
+			}
+		},100);
     }
 	$(function () {
         sessionScopeTs();
@@ -263,7 +265,6 @@
                             }else {
                                 $("#queryCategoryLevel1").append("<option value='"+this.parentId+"'>"+this.categoryName+"</option>");
                             }
-
 						}else if(this.parentId<100) {//二级分类
 							classificationTwo.push(this);
 						}else  if(this.parentId<1000){//三级分类
@@ -424,7 +425,22 @@
             window.location.href="${pageContext.request.contextPath}/vcersion/selectVersions?id="+id;
         }
     });
-
+    /*------------------------修改版本操作------------------------*/
+    $(".modifyVersion").click(function () {
+        var status=$(this).attr("status");
+		var tr=$(this).parent().parent().parent().parent().parent();
+		var appName=tr.children("td").eq(0).text();
+        if(status==7||status==9||status==10){
+			var statusName=tr.children("td").eq(5).text();
+        	alert(appName+"的状态为【"+statusName+"】，不能修改版本信息，只可进行【新增版本】操作!");
+        	return false;
+        }
+        if (tr.children("td").eq(7).text()==""||tr.children("td").eq(7).text()==null){
+			alert(appName+"目前没有版本信息，不能修改版本信息，先【新增版本】才能修改!");
+			return  false;
+        }
+		window.location.href="${pageContext.request.contextPath}/vcersion/selectVersion?appId="+$(this).attr("appinfoid")+"&versionId="+$(this).attr("versionid");
+    });
 
 	/*------------------------删除操作------------------------*/
 	$(function () {
@@ -478,7 +494,7 @@
 					}
 			);
 		});
-/*-------------------------执行修改AppInfo操作------------------*/
+    /*-------------------------执行修改AppInfo操作------------------*/
 		$(".modifyAppInfo").click(function () {
 			var status=$(this).attr("status");
 			if(!(status==6||status==8)){
@@ -489,6 +505,13 @@
 			}
 			var id=$(this).attr("appinfoid");
 			window.location.href="${pageContext.request.contextPath}/infoController/selectAppInfo?id="+id;
+		});
+		/*点击查看app信息*/
+		$(".viewApp").click(function () {
+			var id=$(this).attr("appinfoid");
+			if (id!=null&&id!=""){
+				window.location.href="${pageContext.request.contextPath}/infoController/queryInfo?id="+id;
+			}
 		});
 	});
 

@@ -10,4 +10,6 @@ import java.util.Map;
 public interface VersionService {
     List<Map<String,Object>> getAppInfoVersion(Long id);
     void addVersion(Version version, MultipartFile apk);
+    void getVersions(Long appId,Long versionId,Model model);
+    void updateVersion(Version version,MultipartFile logo);
 }

@@ -22,4 +22,7 @@ public class UserContext {
     public  static <T> T getCurrentUser(){
         return (T) getSession().getAttribute(SESSION_USER);
     }
+    public  static void  setInfo(String str){
+        getSession().setAttribute("ts",str);
+    }
 }

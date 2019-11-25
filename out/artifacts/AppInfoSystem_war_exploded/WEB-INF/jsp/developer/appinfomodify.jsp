@@ -181,7 +181,7 @@
       return true;
     });
     $("#back").click(function () {
-          window.history.go(-1);
+      window.location.href="${pageContext.request.contextPath}/infoController/selectInfo"
     });
   $(function () {
     var classificationOne=[];//一级分类

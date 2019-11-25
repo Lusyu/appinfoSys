@@ -243,7 +243,7 @@
 
 
   $("#back").click(function () {
-    window.history.go(-1);
+    window.location.href="${pageContext.request.contextPath}/infoController/selectInfo"
   });
 
 

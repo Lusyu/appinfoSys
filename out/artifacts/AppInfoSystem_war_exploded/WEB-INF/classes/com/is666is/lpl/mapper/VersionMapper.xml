@@ -34,14 +34,11 @@
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.is666is.lpl.domain.Version">
     update `app_version`
-    set appId = #{appId,jdbcType=BIGINT},
-      versionNo = #{versionNo,jdbcType=VARCHAR},
+    set versionNo = #{versionNo,jdbcType=VARCHAR},
       versionInfo = #{versionInfo,jdbcType=VARCHAR},
       publishStatus = #{publishStatus,jdbcType=BIGINT},
       downloadLink = #{downloadLink,jdbcType=VARCHAR},
       versionSize = #{versionSize,jdbcType=DECIMAL},
-      createdBy = #{createdBy,jdbcType=BIGINT},
-      creationDate = #{creationDate,jdbcType=TIMESTAMP},
       modifyBy = #{modifyBy,jdbcType=BIGINT},
       modifyDate = #{modifyDate,jdbcType=TIMESTAMP},
       apkLocPath = #{apkLocPath,jdbcType=VARCHAR},

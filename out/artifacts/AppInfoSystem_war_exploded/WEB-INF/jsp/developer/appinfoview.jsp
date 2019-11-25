@@ -15,12 +15,12 @@
       </div>
       <div class="x_content1">
         <form class="form-horizontal form-label-left" >
-          <input type="hidden" name="id" value="${appInfo.id}">
+          <input type="hidden" name="id" value="${info.id}">
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">软件名称 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input class="form-control col-md-7 col-xs-12" value="${appInfo.softwareName}" 
+              <input class="form-control col-md-7 col-xs-12" value="${info.softwareName}"
               type="text" readonly="readonly">
             </div>
           </div>
@@ -29,7 +29,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="text" class="form-control col-md-7 col-xs-12" 
-              value="${appInfo.APKName}" readonly="readonly">
+              value="${info.APKName}" readonly="readonly">
             </div>
           </div>
           
@@ -38,7 +38,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input class="form-control col-md-7 col-xs-12" 
-              	value="${appInfo.supportROM}" type="text" readonly="readonly">
+              	value="${info.supportROM}" type="text" readonly="readonly">
             </div>
           </div>
           <div class="item form-group">
@@ -46,14 +46,14 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input class="form-control col-md-7 col-xs-12" readonly="readonly"
-              	value="${appInfo.interfaceLanguage}" type="text">
+              	value="${info.interfaceLanguage}" type="text">
             </div>
           </div>
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">软件大小 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" value="${appInfo.softwareSize}"
+              <input type="text" value="${info.softwareSize}"
               class="form-control col-md-7 col-xs-12" readonly="readonly">
             </div>
           </div>
@@ -62,7 +62,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">下载次数 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" value="${appInfo.downloads}"
+              <input type="text" value="${info.downloads}"
                class="form-control col-md-7 col-xs-12" readonly="readonly">
             </div>
           </div>
@@ -71,7 +71,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="select">所属平台 <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="text" class="form-control col-md-7 col-xs-12" 
-              	value="${appInfo.flatformName}" readonly="readonly">
+              	value="${info.dictionaryFlatformId.valueName}" readonly="readonly">
             
             </div>
           </div>
@@ -79,7 +79,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="select">所属分类 <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="text" class="form-control col-md-7 col-xs-12" 
-              	value="${appInfo.categoryLevel1Name} --> ${appInfo.categoryLevel2Name} --> ${appInfo.categoryLevel3Name}" readonly="readonly">
+              	value="${info.categoryLevel1.categoryName} --> ${info.categoryLevel2.categoryName} --> ${info.categoryLevel3.categoryName}" readonly="readonly">
             </div>
           </div>
           <div class="item form-group">
@@ -87,7 +87,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
             	<input type="text" class="form-control col-md-7 col-xs-12" 
-              	value="${appInfo.statusName}" readonly="readonly">
+              	value="${info.dictionaryStatus.valueName}" readonly="readonly">
             </div>
           </div>
           <div class="item form-group">
@@ -95,7 +95,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <textarea class="form-control col-md-7 col-xs-12" readonly="readonly"> 
-              ${appInfo.appInfo}</textarea>
+              ${info.appInfo}</textarea>
             </div>
           </div>
            <div class="item form-group">
@@ -103,11 +103,11 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
 			 <c:choose> 
-				  <c:when test="${appInfo.logoPicPath == null || appInfo.logoPicPath == ''}">   
+				  <c:when test="${info.logoPicPath == null || appInfo.logoPicPath == ''}">
 				    	暂无
 				  </c:when> 
 				  <c:otherwise>   
-				    <img src="${appInfo.logoPicPath }?m=1" width="100px;"/> 
+				    <img src="${pageContext.request.contextPath}/${info.logoPicPath }" width="100px;"/>
 				  </c:otherwise> 
               </c:choose> 
             </div>
@@ -165,16 +165,16 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="appVersion" items="${appVersionList }" varStatus="status">
+							<c:forEach var="version" items="${versions }" varStatus="status">
 								<tr role="row" class="odd">
-									<td tabindex="0" class="sorting_1">${appVersion.appName}</td>
-									<td>${appVersion.versionNo }</td>
-									<td>${appVersion.versionSize }</td>
-									<td>${appVersion.publishStatusName }</td>
+									<td tabindex="0" class="sorting_1">${version.softwareName}</td>
+									<td>${version.versionNo }</td>
+									<td>${version.versionSize }</td>
+									<td>${version.valueName }</td>
 									<td>
-									<a href="${appVersion.downloadLink }">${appVersion.apkFileName }</a>
+									<a href="${version.downloadLink }">${version.apkFileName }</a>
 									</td>
-									<td><fmt:formatDate value="${appVersion.modifyDate }" pattern="yyyy-MM-dd"/></td>
+									<td><fmt:formatDate value="${version.modifyDate}" pattern="yyyy-MM-dd"/></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -194,3 +194,8 @@
 </div>
 <%@include file="common/footer.jsp"%>
 <script src="${pageContext.request.contextPath }/statics/localjs/appinfoview.js"></script>
+<script>
+        $("#back").click(function () {
+            window.location.href="${pageContext.request.contextPath}/infoController/selectInfo"
+        });
+</script>

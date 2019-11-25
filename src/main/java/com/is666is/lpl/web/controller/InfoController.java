@@ -61,9 +61,15 @@ public class InfoController {
         return "/developer/appinfomodify.jsp";
     }
     //修改appInfo信息
-    @RequestMapping(value = "updateAppInfo",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateAppInfo",method = RequestMethod.POST)
     public  String updateInfo(Info info,MultipartFile logo){
         infoService.udpateInfo(info,logo);
         return "redirect:/infoController/selectInfo";
+    }
+    //查询指定app信息到app查看页面包括与之相关的版本号
+   @RequestMapping("/queryInfo")
+    public  String queryInfo(Long id,Model model){
+        infoService.queryInfo(id,model);
+        return  "/developer/appinfoview.jsp";
     }
 }

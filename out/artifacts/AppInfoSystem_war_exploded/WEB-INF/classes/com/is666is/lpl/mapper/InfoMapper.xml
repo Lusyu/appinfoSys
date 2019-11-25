@@ -26,7 +26,6 @@
     <association property="categoryLevel2" javaType="Category" select="com.is666is.lpl.mapper.CategoryMapper.selectInfoId" column="categoryLevel2" fetchType="eager"/>
     <association property="categoryLevel3" javaType="Category" select="com.is666is.lpl.mapper.CategoryMapper.selectInfoId" column="categoryLevel3" fetchType="eager"/>
     <association property="version" javaType="Version" select="com.is666is.lpl.mapper.VersionMapper.selectInfoId" column="id" fetchType="eager"/>
-
   </resultMap>
   <select id="selectInfo" resultMap="BaseResultMap">
         select * from app_info

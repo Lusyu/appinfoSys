@@ -15,6 +15,7 @@ import org.aspectj.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
@@ -57,7 +58,8 @@ public class InfoServiceImpl implements InfoService {
         info.setDevId(user.getId());
         info.setUpdateDate(new Date());
         info.setCreationDate(new Date());
-        infoMapper.insert(info);
+        int i=infoMapper.insert(info);
+        UserContext.setInfo(i>0?"保存APP成功!":"保存APP失败!");
     }
     /*删除appinfo*/
     @Override
@@ -98,7 +100,15 @@ public class InfoServiceImpl implements InfoService {
         info.setUpdateDate(new Date());
         info.setModifyBy(((User)(UserContext.getCurrentUser())).getId());
         info.setModifyDate(new Date());
-        infoMapper.updateAppInfo(info);
+        int i=infoMapper.updateAppInfo(info);
+        UserContext.setInfo(i>0?"修改APP成功!":"修改APP失败!");
+    }
+
+    //查询出指定的info到info的查看页面
+    @Override
+    public void queryInfo(Long id,Model model) {
+        model.addAttribute("info",infoMapper.selectByPrimaryKey(id));
+        model.addAttribute("versions",versionMapper.getAppInfoVersion(id));
     }
 
 }
