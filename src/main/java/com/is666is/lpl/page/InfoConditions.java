@@ -6,6 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class InfoConditions<T> extends ObjectResult<T>{
+
     private String softwareName;//软件名称
     private Integer statusId=-1;//app状态id
     private Integer flatformId=-1;//所属平台id
