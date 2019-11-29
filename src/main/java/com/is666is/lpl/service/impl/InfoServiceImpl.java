@@ -41,6 +41,14 @@ public class InfoServiceImpl implements InfoService {
         PageHelper.startPage(infoConditions.getCurrentPage(),infoConditions.getSizePage());
         return new PageInfo<T>(infoMapper.selectInfo(infoConditions));
     }
+    /*分页查询*/
+    @Transactional(readOnly = true)
+    public<T> PageInfo<T> selectInfoAudit(InfoConditions<T> infoConditions) {
+        PageHelper.startPage(infoConditions.getCurrentPage(),infoConditions.getSizePage());
+        return new PageInfo<T>(infoMapper.selectInfoAudit(infoConditions));
+    }
+
+
     /*保存APP信息*/
     public void addInfo(Info info, MultipartFile logo, ServletContext servletContext) {
         String imagName=UUID.randomUUID().toString()+"."+ FilenameUtils.getExtension(logo.getOriginalFilename());
@@ -109,6 +117,13 @@ public class InfoServiceImpl implements InfoService {
     public void queryInfo(Long id,Model model) {
         model.addAttribute("info",infoMapper.selectByPrimaryKey(id));
         model.addAttribute("versions",versionMapper.getAppInfoVersion(id));
+    }
+    /*修改app状态*/
+    @Override
+    public void updateAppAudit(Long appId, Long versionId, Long status) {
+        int i=infoMapper.updateAppAudit(appId,status);
+        versionMapper.updateVersionStatus(versionId,status==7L?2L:1L);
+        UserContext.setInfo(i>0?"修改app状态成功!":"修改app状态失败!");
     }
 
 }

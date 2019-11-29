@@ -23,4 +23,8 @@ public interface InfoMapper {
     int updateAppInfoStatus(@Param("id") Long id, @Param("status") Long status,@Param("date") Date date);
 
     int updateAppInfo(Info info);
+
+    <T> List<T> selectInfoAudit(InfoConditions<T> infoConditions);
+    //修改app审核状态
+    int updateAppAudit(@Param("appId") Long appId,@Param("status") Long status);
 }

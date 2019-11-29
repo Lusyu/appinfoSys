@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import java.util.Date;
@@ -24,12 +23,19 @@ public class InfoController {
     private ServletContext servletContext;
     @Resource(name = "infoService")
     private InfoService infoService;
-    //查询App信息
+    //查询所有App信息
     @RequestMapping(value = "/selectInfo")
     public String selectInfo(Model model,@ModelAttribute("info")InfoConditions<Info> infoConditions){/*app分页查询*/
         PageInfo<Info> infoList = infoService.getInfoList(infoConditions);
         model.addAttribute("pageInfo",infoList);
         return  "/developer/appinfolist.jsp";
+    }
+    //查询所有审核App信息
+    @RequestMapping(value = "/selectInfoAudit")
+    public String selectInfoAudit(Model model,@ModelAttribute("info")InfoConditions<Info> infoConditions){/*app分页查询*/
+        PageInfo<Info> infoList = infoService.selectInfoAudit(infoConditions);
+        model.addAttribute("pageInfo",infoList);
+        return  "/backend/applist.jsp";
     }
     /*保存App信息*/
     @RequestMapping(value = "/addInfo",method = RequestMethod.POST)
@@ -72,4 +78,19 @@ public class InfoController {
         infoService.queryInfo(id,model);
         return  "/developer/appinfoview.jsp";
     }
+
+    //查询出单个appinfo到审核页面
+    @RequestMapping(value = "/selectAppInfoAndVersion",method = RequestMethod.POST)
+    public String selectAppInfoAndVersion(Long id,Model model){
+        model.addAttribute("appInfo",infoService.selectInfo(id));
+        return "/backend/appcheck.jsp";
+    }
+
+    //查询出单个appinfo到审核页面
+    @RequestMapping(value = "/updateAppAudit",method = RequestMethod.POST)
+    public String updateAppAudit(Long appId,Long versionId,Long status){
+        infoService.updateAppAudit(appId,versionId,status);
+        return "redirect:/infoController/selectInfoAudit";
+    }
+
 }

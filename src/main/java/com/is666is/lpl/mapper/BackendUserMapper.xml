@@ -5,13 +5,26 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="userCode" jdbcType="VARCHAR" property="userCode" />
     <result column="userName" jdbcType="VARCHAR" property="userName" />
-    <result column="userType" jdbcType="BIGINT" property="userType" />
     <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
     <result column="creationDate" jdbcType="TIMESTAMP" property="creationDate" />
     <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
     <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
     <result column="userPassword" jdbcType="VARCHAR" property="userPassword" />
+    <association property="dictionary" javaType="Dictionary" resultMap="DictionaryMap"/>
   </resultMap>
+  <resultMap id="DictionaryMap" type="Dictionary">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="typeCode" jdbcType="VARCHAR" property="typeCode" />
+    <result column="typeName" jdbcType="VARCHAR" property="typeName" />
+    <result column="valueId" jdbcType="BIGINT" property="valueId" />
+    <result column="valueName" jdbcType="VARCHAR" property="valueName" />
+    <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
+    <result column="creationDate" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from `backend_user`
     where id = #{id,jdbcType=BIGINT}
@@ -46,5 +59,9 @@
     select id, userCode, userName, userType, createdBy, creationDate, modifyBy, modifyDate, 
     userPassword
     from `backend_user`
+  </select>
+  <select id="getBakendUser" resultMap="BaseResultMap">
+        select * from backend_user u inner join data_dictionary d on u.userType=d.valueId
+        where u.userName=#{userName} and u.userPassword=#{userPassword} and d.typeCode='USER_TYPE'
   </select>
 </mapper>

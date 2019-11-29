@@ -13,4 +13,6 @@ public interface BackendUserMapper {
     List<BackendUser> selectAll();
 
     int updateByPrimaryKey(BackendUser record);
+
+    BackendUser getBakendUser(BackendUser backendUser);
 }

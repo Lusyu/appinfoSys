@@ -73,4 +73,8 @@
       INSERT  INTO `app_version`(`appId`,`versionNo`,`versionInfo`,`publishStatus`,`downloadLink`,`versionSize`,`createdBy`,`creationDate`,`modifyBy`,`modifyDate`,`apkLocPath`,`apkFileName`)
       VALUES(#{appId},#{versionNo},#{versionInfo},#{publishStatus},#{downloadLink},#{versionSize},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},#{apkLocPath},#{apkFileName})
   </insert>
+  <!--修改版本的状态-->
+  <update id="updateVersionStatus">
+        update app_version set publishStatus=#{status} where id=#{versionId}
+  </update>
 </mapper>

@@ -15,10 +15,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UserInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (UserContext.getCurrentUser()==null){
+        if (UserContext.getCurrentUser()!=null||UserContext.getCurrentSuperUser()!=null){
+            return  true;
+        }else if (UserContext.getCurrentUser()==null){
             response.sendRedirect(request.getContextPath()+"/index/login");
             return  false;
+        }else{
+            response.sendRedirect(request.getContextPath()+"/index/loginBackendUser");
+            return  false;
         }
-        return  true;
     }
 }

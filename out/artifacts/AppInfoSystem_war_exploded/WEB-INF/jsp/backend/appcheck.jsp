@@ -6,7 +6,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>查看并审核APP信息 <i class="fa fa-user"></i>${userSession.userName}</small></h2>
+        <h2>查看并审核APP信息 <i class="fa fa-user">${super_user.userName}</i></h2>
              <div class="clearfix"></div>
       </div>
       <div class="x_title">
@@ -15,12 +15,11 @@
       </div>
       <div class="x_content1">
         <form class="form-horizontal form-label-left" action="checksave" method="post">
-          <input type="hidden" name="id" value="${appInfo.id}">
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">软件名称 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input class="form-control col-md-7 col-xs-12" value="${appInfo.softwareName}" 
+              <input class="form-control col-md-7 col-xs-12" value="${appInfo.softwareName}"
               type="text" readonly="readonly">
             </div>
           </div>
@@ -71,7 +70,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="select">所属平台 <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="text" class="form-control col-md-7 col-xs-12" 
-              	value="${appInfo.flatformName}" readonly="readonly">
+              	value="${appInfo.dictionaryFlatformId.valueName}" readonly="readonly">
             
             </div>
           </div>
@@ -79,7 +78,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="select">所属分类 <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="text" class="form-control col-md-7 col-xs-12" 
-              	value="${appInfo.categoryLevel1Name} --> ${appInfo.categoryLevel2Name} --> ${appInfo.categoryLevel3Name}" readonly="readonly">
+              	value="${appInfo.categoryLevel1.categoryName}-> ${appInfo.categoryLevel2.categoryName} -> ${appInfo.categoryLevel3.categoryName}" readonly="readonly">
             </div>
           </div>
           <div class="item form-group">
@@ -87,7 +86,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
             	<input type="text" class="form-control col-md-7 col-xs-12" 
-              	value="${appInfo.statusName}" readonly="readonly">
+              	value="${appInfo.dictionaryStatus.valueName}" readonly="readonly">
             </div>
           </div>
           <div class="item form-group">
@@ -107,18 +106,23 @@
 				    	暂无
 				  </c:when> 
 				  <c:otherwise>   
-				    <img src="${appInfo.logoPicPath }?m=1" width="100px;"/> 
+				    <img src="${pageContext.request.contextPath}/${appInfo.logoPicPath }" width="100px;"/>
 				  </c:otherwise> 
               </c:choose> 
             </div>
           </div>
         	<div class="form-group">
         		<div class="col-md-6 col-md-offset-3">
-        		<button id="status" type="submit" name="status" value="2" class="btn btn-success">审核通过</button>
-        		<button id="status" type="submit" name="status" value="3" class="btn btn-success">审核不通过</button>
+        		<button class="status" type="button" name="status" value="7" class="btn btn-success">审核通过</button>
+        		<button class="status" type="button" name="status" value="8" class="btn btn-success">审核不通过</button>
           		<button type="button" class="btn btn-primary" id="back">返回</button>
         		</div>
      		</div>
+        </form>
+        <form action="${pageContext.request.contextPath}/infoController/updateAppAudit" id="formStatus" method="post">
+          <input type="hidden" name="appId" value="${appInfo.id}">
+          <input type="hidden" name="versionId" value="${appInfo.version.id}">
+          <input type="hidden" name="status" value="" id="statusi"/>
         </form>
         </div>
         <div class="clearfix"></div>
@@ -137,7 +141,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">版本号 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input class="form-control col-md-7 col-xs-12" value="${appVersion.versionNo }" 
+              <input class="form-control col-md-7 col-xs-12" value="${appInfo.version.versionNo}"
               type="text" readonly="readonly" >
             </div>
           </div>
@@ -145,7 +149,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">版本大小 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="number" value="${appVersion.versionSize }" class="form-control col-md-7 col-xs-12">
+              <input type="number" value="${appInfo.version.versionSize}" class="form-control col-md-7 col-xs-12">
             </div>
           </div>
        
@@ -155,13 +159,12 @@
               <input type="hidden" name="publishStatus" id="publishStatus" value="3">预发布
             </div>
           </div>
-        
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">版本简介 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <textarea class="form-control col-md-7 col-xs-12">
-              ${appVersion.versionInfo }</textarea>
+              ${appInfo.version.versionInfo }</textarea>
             </div>
           </div>
            <div class="item form-group">
@@ -169,12 +172,12 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
             <c:choose> 
-			  <c:when test="${appVersion.downloadLink == null || appVersion.downloadLink == ''}">   
+			  <c:when test="${appInfo.version.downloadLink == null || appInfo.version.downloadLink == ''}">
 			    	暂无
 			  </c:when> 
 			  <c:otherwise>   
-			    <p>${appVersion.apkFileName}&nbsp;&nbsp;
-			    <a href="${appVersion.downloadLink}" >下载</a>
+			    <p>${appInfo.version.apkFileName}&nbsp;&nbsp;
+			    <a href="${appInfo.version.downloadLink}" >下载</a>
 			    </p>
 			  </c:otherwise> 
             </c:choose> 
@@ -189,4 +192,12 @@
   </div>
 </div>
 <%@include file="common/footer.jsp"%>
-<script src="${pageContext.request.contextPath }/statics/localjs/appcheck.js"></script>
+<%--
+<script src="${pageContext.request.contextPath }/statics/localjs/appcheck.js"></script>--%>
+<script src="${pageContext.request.contextPath}/statics/jquery-1.8.3.js"></script>
+<script>
+    $(".status").click(function () {
+        $("#statusi").val($(this).val());
+        $("#formStatus").submit();
+    });
+</script>

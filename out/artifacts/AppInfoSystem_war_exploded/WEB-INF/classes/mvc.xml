@@ -26,6 +26,8 @@
                 <mvc:mapping path="/**"/><!--对所有-->
                 <mvc:exclude-mapping path="/user/login"/>
                 <mvc:exclude-mapping path="/index/login"/>
+                <mvc:exclude-mapping path="/backendUser/loginBackendUser"/>
+                <mvc:exclude-mapping path="/index/loginBackendUser"/>
                 <bean class="com.is666is.lpl.web.interceptor.UserInterceptor"/>
             </mvc:interceptor>
         </mvc:interceptors>

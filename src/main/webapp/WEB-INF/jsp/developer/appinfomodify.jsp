@@ -210,10 +210,10 @@
     )
 
     //当一级分类改变下拉框 并且index为-1的时候删除二级和三级的下拉框 然后添加二三级提示
-    $("#queryCategoryLevel1").change(function () {
-      select1("#categoryLevel2","#categoryLevel2",$(this).val());
+    $("#categoryLevel1").change(function () {
+      select1("#categoryLevel2","#categoryLevel3",$(this).val());
     });
-    select1("#categoryLevel2","#categoryLevel2",-1);
+    select1("#categoryLevel2","#categoryLevel3",-1);
     /*----------当一级分类没有做选择的时候  二级和三级分别是默认状态-------------*/
     function select1(categorylevel2list,categoryLevel3List,index){
       selectRemove(categorylevel2list);

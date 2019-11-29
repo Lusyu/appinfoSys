@@ -13,7 +13,7 @@ public class BackendUser {
 
     private String userName;
 
-    private Long userType;
+    private Dictionary dictionary=new Dictionary();
 
     private Long createdBy;
 
