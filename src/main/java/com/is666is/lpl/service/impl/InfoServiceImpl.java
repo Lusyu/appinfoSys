@@ -123,7 +123,7 @@ public class InfoServiceImpl implements InfoService {
     public void updateAppAudit(Long appId, Long versionId, Long status) {
         int i=infoMapper.updateAppAudit(appId,status);
         versionMapper.updateVersionStatus(versionId,status==7L?2L:1L);
-        UserContext.setInfo(i>0?"修改app状态成功!":"修改app状态失败!");
+        UserContext.setInfo(i>0?"修改app审核状态成功!":"修改app审核状态失败!");
     }
 
 }

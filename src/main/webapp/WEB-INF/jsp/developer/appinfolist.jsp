@@ -245,7 +245,7 @@
 			if ($("#ts").val()!=null&&$("#ts").val()!=""){
 				alert($("#ts").val());
 			}
-		},100);
+		},200);
     }
 	$(function () {
         sessionScopeTs();

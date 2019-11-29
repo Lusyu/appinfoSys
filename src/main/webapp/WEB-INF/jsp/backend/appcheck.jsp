@@ -200,4 +200,7 @@
         $("#statusi").val($(this).val());
         $("#formStatus").submit();
     });
+    $("#back").click(function () {
+      window.location.href="${pageContext.request.contextPath}/infoController/selectInfoAudit"
+    });
 </script>

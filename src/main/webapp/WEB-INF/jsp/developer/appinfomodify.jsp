@@ -149,12 +149,17 @@
     </div>
   </div>
 </div>
+<input type="hidden" id="verStatus" value="${appInfo.version.publishStatus}"/>
 <%@include file="common/footer.jsp"%>
 <%--
 <script src="${pageContext.request.contextPath }/statics/localjs/appinfomodify.js"></script>--%>
 <script src="${pageContext.request.contextPath }/statics/jquery-1.8.3.js"></script>
 <script>
-    $("#sendAndPush").click(function () {
+    $("#sendAndPush").click(function () {//审核通过
+      if (parseInt($("#verStatus").val())!=3){
+          alert("该App的版本信息不是预发布,不能进行APP审核，请先修改版本信息或新增版本信息!");
+          return false;
+      }
       $("#dictionaryStatus").val(6);
     });
     $("#deleteimg").click(function () {
@@ -207,7 +212,7 @@
                 }
               });
             }
-    )
+    );
 
     //当一级分类改变下拉框 并且index为-1的时候删除二级和三级的下拉框 然后添加二三级提示
     $("#categoryLevel1").change(function () {
