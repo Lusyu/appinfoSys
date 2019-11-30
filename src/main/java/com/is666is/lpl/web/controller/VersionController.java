@@ -23,7 +23,6 @@ public class VersionController {
     public String selectVersions(Long id, Model model){
         model.addAttribute("versions",versionService.getAppInfoVersion(id));
         model.addAttribute("appId",id);
-
         return "/developer/appversionadd.jsp";
     }
     //新增版本
