@@ -13,7 +13,7 @@ public class MD5Utils {
 			secretBytes = MessageDigest.getInstance("md5").digest(
 					plainText.getBytes());
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException("û��md5����㷨��");
+			throw new RuntimeException("不能为空并且不能为Null!");
 		}
 		String md5code = new BigInteger(1, secretBytes).toString(16);
 		for (int i = 0; i < 32 - md5code.length(); i++) {

@@ -11,7 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 @ControllerAdvice
 public class HandlerExceptionAdvice {
     @ExceptionHandler(MaxUploadSizeExceededException.class)
@@ -22,6 +21,5 @@ public class HandlerExceptionAdvice {
         }else{
             return  "redirect:/index/appinfoadd";
         }
-
     }
 }
