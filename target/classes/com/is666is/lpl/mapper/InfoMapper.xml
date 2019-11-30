@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.is666is.lpl.mapper.InfoMapper">
+    <resultMap id="BaseResultMap" type="com.is666is.lpl.domain.Info">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="softwareName" jdbcType="VARCHAR" property="softwareName"/>
+        <result column="APKName" jdbcType="VARCHAR" property="APKName"/>
+        <result column="supportROM" jdbcType="VARCHAR" property="supportROM"/>
+        <result column="interfaceLanguage" jdbcType="VARCHAR" property="interfaceLanguage"/>
+        <result column="softwareSize" jdbcType="DECIMAL" property="softwareSize"/>
+        <result column="updateDate" jdbcType="DATE" property="updateDate"/>
+        <result column="devId" jdbcType="BIGINT" property="devId"/>
+        <result column="appInfo" jdbcType="VARCHAR" property="appInfo"/>
+        <result column="onSaleDate" jdbcType="TIMESTAMP" property="onSaleDate"/>
+        <result column="offSaleDate" jdbcType="TIMESTAMP" property="offSaleDate"/>
+        <result column="downloads" jdbcType="BIGINT" property="downloads"/>
+        <result column="createdBy" jdbcType="BIGINT" property="createdBy"/>
+        <result column="creationDate" jdbcType="TIMESTAMP" property="creationDate"/>
+        <result column="modifyBy" jdbcType="BIGINT" property="modifyBy"/>
+        <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate"/>
+        <result column="logoPicPath" jdbcType="VARCHAR" property="logoPicPath"/>
+        <result column="logoLocPath" jdbcType="VARCHAR" property="logoLocPath"/>
+        <association property="dictionaryStatus" javaType="Dictionary"
+                     select="com.is666is.lpl.mapper.DictionaryMapper.selectInfoId" column="status" fetchType="eager"/>
+        <association property="dictionaryFlatformId" javaType="Dictionary"
+                     select="com.is666is.lpl.mapper.DictionaryMapper.selectInfoId" column="flatformId"
+                     fetchType="eager"/>
+        <association property="categoryLevel1" javaType="Category"
+                     select="com.is666is.lpl.mapper.CategoryMapper.selectInfoId" column="categoryLevel1"
+                     fetchType="eager"/>
+        <association property="categoryLevel2" javaType="Category"
+                     select="com.is666is.lpl.mapper.CategoryMapper.selectInfoId" column="categoryLevel2"
+                     fetchType="eager"/>
+        <association property="categoryLevel3" javaType="Category"
+                     select="com.is666is.lpl.mapper.CategoryMapper.selectInfoId" column="categoryLevel3"
+                     fetchType="eager"/>
+        <association property="version" javaType="Version" select="com.is666is.lpl.mapper.VersionMapper.selectInfoId"
+                     column="id" fetchType="eager"/>
+    </resultMap>
+    <select id="selectInfo" resultMap="BaseResultMap">
+        select * from app_info
+        <where>
+            <if test="softwareName!=null">
+                and softwareName like concat('%',#{softwareName},'%')
+            </if>
+            <if test="statusId!=-1 and statusId!=null">
+                and status=#{statusId}
+            </if>
+            <if test="flatformId!=-1 and flatformId!=null">
+                and flatformId=#{flatformId}
+            </if>
+            <if test="categoryLevel1!=-1 and categoryLevel1!=null">
+                <choose>
+                    <when test="categoryLevel1==1">
+                    </when>
+                    <otherwise>
+                        and categoryLevel1=#{categoryLevel1}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="categoryLevel2!=-1 and categoryLevel2!=null">
+                and categoryLevel2=#{categoryLevel2}
+            </if>
+            <if test="categoryLevel3!=-1 and categoryLevel3!=null">
+                and categoryLevel3=#{categoryLevel3}
+            </if>
+        </where>
+    </select>
+    <insert id="insert" parameterType="Info">
+        INSERT INTO `app_info`(`id`, `softwareName`, `APKName`, `supportROM`, `interfaceLanguage`, `softwareSize`,
+                               `updateDate`,
+                               `devId`, `appInfo`, `status`, `onSaleDate`, `offSaleDate`, `flatformId`,
+                               `categoryLevel3`, `downloads`, `createdBy`, `creationDate`, `modifyBy`, `modifyDate`,
+                               `categoryLevel1`, `categoryLevel2`, `logoPicPath`, `logoLocPath`, `versionId`)
+        VALUES (#{id}, #{softwareName}, #{APKName}, #{supportROM}, #{interfaceLanguage}, #{softwareSize}, #{updateDate},
+                #{devId}, #{appInfo}, #{dictionaryStatus.id}, #{onSaleDate}, #{offSaleDate}, #{dictionaryFlatformId.id},
+                #{categoryLevel3.parentId}, #{downloads}, #{createdBy}, #{creationDate}, #{modifyBy}, #{modifyDate},
+                #{categoryLevel1.parentId}, #{categoryLevel2.parentId}, #{logoPicPath}, #{logoLocPath}, #{version.id});
+    </insert>
+    <!--删除APPinfo-->
+    <delete id="deleteByPrimaryKey">
+        delete
+        from app_info
+        where id = #{id}
+    </delete>
+    <!--修改appinfo的状态-->
+    <update id="updateAppInfoStatus">
+        update app_info set status=#{status}
+        <if test="status==9L">
+            ,onSaleDate=#{date}
+        </if>
+        <if test="status==10L">
+            ,offSaleDate=#{date}
+        </if>
+        where id=#{id}
+    </update>
+    <!--根据id查询appinfo-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select *
+        from app_info
+        where id = #{id}
+    </select>
+    <update id="updateAppInfo" parameterType="Info">
+        UPDATE app_info
+        SET softwareName=#{softwareName},
+            supportROM=#{supportROM},
+            interfaceLanguage=#{interfaceLanguage},
+            softwareSize=#{softwareSize},
+            updateDate=#{updateDate},
+            appInfo=#{appInfo},
+            status=#{dictionaryStatus.id},
+            flatformId=#{dictionaryFlatformId.id},
+            categoryLevel3=#{categoryLevel3.parentId},
+            downloads=#{downloads},
+            modifyBy=#{modifyBy},
+            modifyDate=#{modifyDate},
+            categoryLevel1=#{categoryLevel1.parentId},
+            categoryLevel2=#{categoryLevel2.parentId},
+            logoPicPath=#{logoPicPath},
+            logoLocPath=#{logoLocPath}
+        where id = #{id}
+    </update>
+    <select id="selectInfoAudit" resultMap="BaseResultMap">
+        select * from app_info
+        <where>
+            <if test="softwareName!=null">
+                and softwareName like concat('%',#{softwareName},'%')
+            </if>
+            <if test="statusId!=-1 and statusId!=null">
+                and status=#{statusId}
+            </if>
+            <if test="flatformId!=-1 and flatformId!=null">
+                and flatformId=#{flatformId}
+            </if>
+            <if test="categoryLevel1!=-1 and categoryLevel1!=null">
+                <choose>
+                    <when test="categoryLevel1==1">
+                    </when>
+                    <otherwise>
+                        and categoryLevel1=#{categoryLevel1}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="categoryLevel2!=-1 and categoryLevel2!=null">
+                and categoryLevel2=#{categoryLevel2}
+            </if>
+            <if test="categoryLevel3!=-1 and categoryLevel3!=null">
+                and categoryLevel3=#{categoryLevel3}
+            </if>
+                and status=6
+        </where>
+    </select>
+    <!--修改app状态-->
+    <update id="updateAppAudit">
+        update app_info set status=#{status} where id=#{appId}
+    </update>
+</mapper>

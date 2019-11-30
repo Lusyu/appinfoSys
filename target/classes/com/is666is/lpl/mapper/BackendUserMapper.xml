@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.is666is.lpl.mapper.BackendUserMapper">
+  <resultMap id="BaseResultMap" type="com.is666is.lpl.domain.BackendUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userCode" jdbcType="VARCHAR" property="userCode" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
+    <result column="creationDate" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="userPassword" jdbcType="VARCHAR" property="userPassword" />
+    <association property="dictionary" javaType="Dictionary" resultMap="DictionaryMap"/>
+  </resultMap>
+  <resultMap id="DictionaryMap" type="Dictionary">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="typeCode" jdbcType="VARCHAR" property="typeCode" />
+    <result column="typeName" jdbcType="VARCHAR" property="typeName" />
+    <result column="valueId" jdbcType="BIGINT" property="valueId" />
+    <result column="valueName" jdbcType="VARCHAR" property="valueName" />
+    <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
+    <result column="creationDate" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `backend_user`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.is666is.lpl.domain.BackendUser" useGeneratedKeys="true">
+    insert into `backend_user` (userCode, userName, userType, 
+      createdBy, creationDate, modifyBy, 
+      modifyDate, userPassword)
+    values (#{userCode,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userType,jdbcType=BIGINT}, 
+      #{createdBy,jdbcType=BIGINT}, #{creationDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, 
+      #{modifyDate,jdbcType=TIMESTAMP}, #{userPassword,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.is666is.lpl.domain.BackendUser">
+    update `backend_user`
+    set userCode = #{userCode,jdbcType=VARCHAR},
+      userName = #{userName,jdbcType=VARCHAR},
+      userType = #{userType,jdbcType=BIGINT},
+      createdBy = #{createdBy,jdbcType=BIGINT},
+      creationDate = #{creationDate,jdbcType=TIMESTAMP},
+      modifyBy = #{modifyBy,jdbcType=BIGINT},
+      modifyDate = #{modifyDate,jdbcType=TIMESTAMP},
+      userPassword = #{userPassword,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, userCode, userName, userType, createdBy, creationDate, modifyBy, modifyDate, 
+    userPassword
+    from `backend_user`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, userCode, userName, userType, createdBy, creationDate, modifyBy, modifyDate, 
+    userPassword
+    from `backend_user`
+  </select>
+  <select id="getBakendUser" resultMap="BaseResultMap">
+        select * from backend_user u inner join data_dictionary d on u.userType=d.valueId
+        where u.userName=#{userName} and u.userPassword=#{userPassword} and d.typeCode='USER_TYPE'
+  </select>
+</mapper>
