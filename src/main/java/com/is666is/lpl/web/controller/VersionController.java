@@ -25,7 +25,7 @@ public class VersionController {
         model.addAttribute("appId",id);
         return "/developer/appversionadd.jsp";
     }
-    //新增版本
+    //对对应的app新增新版本信息
     @RequestMapping(value = "/addVersion",method = RequestMethod.POST)
     public  String addVersion(Version version, MultipartFile apk){
         versionService.addVersion(version,apk);
