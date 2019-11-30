@@ -6,10 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a0012d7-b3f0-4b34-875b-d24a2c64e8da" name="Default Changelist" comment="项目已完成!">
+    <list default="true" id="1a0012d7-b3f0-4b34-875b-d24a2c64e8da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/is666is/lpl/web/controller/VersionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/is666is/lpl/web/controller/VersionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -94,8 +93,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/is666is/lpl/web/controller/VersionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+            <state relative-caret-position="201">
+              <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -154,6 +153,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode />
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -246,85 +248,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="AppInfoSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AppInfoSystem" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AppInfoSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AppInfoSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AppInfoSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AppInfoSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AppInfoSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AppInfoSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AppInfoSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AppInfoSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AppInfoSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AppInfoSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="is666is" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AppInfoSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AppInfoSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="is666is" type="462c0819:PsiDirectoryNode" />
-              <item name="lpl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AppInfoSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AppInfoSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="is666is" type="462c0819:PsiDirectoryNode" />
-              <item name="lpl" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AppInfoSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AppInfoSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="is666is" type="462c0819:PsiDirectoryNode" />
-              <item name="lpl" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -346,7 +270,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="spring" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -549,7 +473,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49713194" visible="true" weight="0.26399395" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49713194" visible="true" weight="0.11422088" />
       <window_info id="Structure" order="1" sideWeight="0.501634" side_tool="true" weight="0.23298033" />
       <window_info id="Designer" order="2" />
       <window_info id="JRebel" order="3" sideWeight="0.502193" side_tool="true" weight="0.21709532" />
@@ -562,7 +486,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.22913256" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.5090016" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4969743" visible="true" weight="0.32242227" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4969743" visible="true" weight="0.049099836" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
@@ -640,7 +564,9 @@
     <MESSAGE value="增加了app的查看app信息" />
     <MESSAGE value="最后一次完成项目" />
     <MESSAGE value="项目已完成!" />
-    <option name="LAST_COMMIT_MESSAGE" value="项目已完成!" />
+    <MESSAGE value="完成" />
+    <MESSAGE value="终于完成了" />
+    <option name="LAST_COMMIT_MESSAGE" value="终于完成了" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1011,8 +937,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/is666is/lpl/web/controller/VersionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        <state relative-caret-position="201">
+          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
         </state>
       </provider>
     </entry>
