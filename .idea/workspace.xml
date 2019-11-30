@@ -7,8 +7,107 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a0012d7-b3f0-4b34-875b-d24a2c64e8da" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/is666is/lpl/web/controller/VersionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/is666is/lpl/web/controller/VersionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/META-INF/AppInfoSystem.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/applicationContext.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/com/is666is/lpl/page/InfoConditions.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/com/is666is/lpl/page/ObjectResult.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/com/is666is/lpl/util/DateUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/com/is666is/lpl/web/advice/HandlerExceptionAdvice.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/com/is666is/lpl/web/controller/BackendUserController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/com/is666is/lpl/web/controller/CategoryController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/com/is666is/lpl/web/controller/DictionaryController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/com/is666is/lpl/web/controller/InfoController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/com/is666is/lpl/web/controller/VersionController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/com/is666is/lpl/web/interceptor/UserInterceptor.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/db.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/ehcache.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/generatorConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/mybatis.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/WEB-INF/classes/rebel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/images/5e89543a-0dcb-4a76-9838-c80608d32241.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/images/654c189f-5edc-4c2d-895c-55e4d925fc89.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/images/7052c71c-fbaf-4014-8bd0-c664e67b53ce.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/images/a641fb63-1029-4ec1-a6a9-a540a7ce97d2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/images/b5a26c7d-3040-470f-aa32-4ea469c40247.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/images/b71fde3f-509b-4514-9a3a-72dfe60b921d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/images/fba6649b-8e33-48b6-aa2e-f66a1ad10413.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/jquery-1.8.3.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/dfd-V1.2.2.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/dfdfdf-V1.2.1.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/dfdfdf-V1.2.4.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/effef-V1.1.2.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/effef-V1.2.1.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/ere-V1.2.2.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/fgf-V1.2.1.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/fgf-V1.2.2.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/fgfg-V1.2.1.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/fgfgk,-V1.2.3.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/gjytjg-V1.2.3.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/p1 (2)-V1.2.1.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/p1-V1.2.2.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/vfv-V1.2.1.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/AppInfoSystem_war_exploded/statics/uploadfiles/ytjh-V1.2.1.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/AppInfoSystem.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/applicationContext.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/Generator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/domain/BackendUser.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/domain/Category.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/domain/Dictionary.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/domain/Info.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/domain/Promotion.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/domain/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/domain/Version.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/BackendUserMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/BackendUserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/CategoryMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/CategoryMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/DictionaryMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/DictionaryMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/InfoMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/InfoMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/PromotionMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/PromotionMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/UserMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/VersionMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/VersionMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/mapper/userMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/page/InfoConditions.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/page/ObjectResult.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/BackendUserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/CategoryService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/DictionaryService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/InfoService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/PromotionService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/UserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/VersionService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/impl/BackendUserServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/impl/CategoryServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/impl/DictionaryServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/impl/InfoServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/impl/PromotionServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/service/impl/VersionServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/util/MD5Utils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/util/UserContext.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/web/advice/HandlerExceptionAdvice.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/web/controller/BackendUserController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/web/controller/CategoryController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/web/controller/DictionaryController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/web/controller/InfoController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/web/controller/UserController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/web/controller/VersionController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/web/controller/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/is666is/lpl/web/interceptor/UserInterceptor.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/db.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ehcache.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/generatorConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mvc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mybatis.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/rebel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -93,8 +192,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/is666is/lpl/web/controller/VersionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+            <state relative-caret-position="165">
+              <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -270,7 +369,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="settings.gitee" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -471,9 +570,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49713194" visible="true" weight="0.11422088" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49713194" visible="true" weight="0.13086233" />
       <window_info id="Structure" order="1" sideWeight="0.501634" side_tool="true" weight="0.23298033" />
       <window_info id="Designer" order="2" />
       <window_info id="JRebel" order="3" sideWeight="0.502193" side_tool="true" weight="0.21709532" />
@@ -486,7 +584,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.22913256" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.5090016" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4969743" visible="true" weight="0.049099836" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4969743" visible="true" weight="0.049099836" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
@@ -937,8 +1035,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/is666is/lpl/web/controller/VersionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+        <state relative-caret-position="165">
+          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
         </state>
       </provider>
     </entry>
