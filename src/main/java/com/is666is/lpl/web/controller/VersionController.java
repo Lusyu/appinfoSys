@@ -37,7 +37,7 @@ public class VersionController {
         versionService.getVersions(appId,versionId,model);
         return  "/developer/appversionmodify.jsp";
     }
-    //版本修改
+    //对对应的app信息版本修改
     @RequestMapping("/updateVersion")
     public  String updateVersion(Version version,MultipartFile logo){
         versionService.updateVersion(version,logo);
