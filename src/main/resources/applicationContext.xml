@@ -36,6 +36,7 @@
         <property name="typeAliasesPackage" value="com.is666is.lpl.domain"/><!--给实体类  起别名-->
        <property name="mapperLocations" value="classpath:com/is666is/lpl/mapper/*Mapper.xml"/>
     </bean>
+
     <!--扫描生成mapper接口代理对象-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.is666is.lpl.mapper"/>
