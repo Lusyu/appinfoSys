@@ -211,6 +211,14 @@
 										aria-controls="datatable-responsive" data-dt-idx="1"
 										tabindex="0">上一页</a>
 									</li>
+									<c:forEach begin="${requestScope.pageScope.currentPageMinPage}" var="page" end="${requestScope.pageScope.currentPageMaxPage}">
+										<li class="paginate_button "><a
+												href="javascript:page_nav(${page});"
+												aria-controls="datatable-responsive" data-dt-idx="1"
+												tabindex="0">${page}</a>
+										</li>
+									</c:forEach>
+
 								<%--</c:if>--%>
 								<%--<c:if test="${pages.currentPageNo < pages.totalPageCount }">--%>
 									<li class="paginate_button "><a

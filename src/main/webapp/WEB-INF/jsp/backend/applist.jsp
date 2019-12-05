@@ -178,6 +178,13 @@
                                         aria-controls="datatable-responsive" data-dt-idx="1"
                                         tabindex="0">上一页</a>
 									</li>
+									<c:forEach begin="${requestScope.pageScope.currentPageMinPage}" var="page" end="${requestScope.pageScope.currentPageMaxPage}">
+										<li class="paginate_button "><a
+												href="javascript:page(${page});"
+												aria-controls="datatable-responsive" data-dt-idx="1"
+												tabindex="0">${page}</a>
+										</li>
+									</c:forEach>
 									<li class="paginate_button "><a
 										href="javascript:page(${requestScope.pageInfo.pageNum+1<requestScope.pageInfo.pages?requestScope.pageInfo.pageNum+1:requestScope.pageInfo.pages});"
 										aria-controls="datatable-responsive" data-dt-idx="1"

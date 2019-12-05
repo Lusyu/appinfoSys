@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.is666is.lpl.domain.Info;
 import com.is666is.lpl.page.InfoConditions;
 import com.is666is.lpl.service.InfoService;
+import com.is666is.lpl.util.PageScope;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ public class InfoController {
     @RequestMapping(value = "/selectInfo")
     public String selectInfo(Model model,@ModelAttribute("info")InfoConditions<Info> infoConditions){/*app分页查询*/
         PageInfo<Info> infoList = infoService.getInfoList(infoConditions);
+        model.addAttribute("pageScope", PageScope.getMapPageSize(infoList.getPageNum(),infoList.getPages()));
         model.addAttribute("pageInfo",infoList);
         return  "/developer/appinfolist.jsp";
     }
@@ -34,6 +36,7 @@ public class InfoController {
     @RequestMapping(value = "/selectInfoAudit")
     public String selectInfoAudit(Model model,@ModelAttribute("info")InfoConditions<Info> infoConditions){/*app分页查询*/
         PageInfo<Info> infoList = infoService.selectInfoAudit(infoConditions);
+        model.addAttribute("pageScope", PageScope.getMapPageSize(infoList.getPageNum(),infoList.getPages()));
         model.addAttribute("pageInfo",infoList);
         return  "/backend/applist.jsp";
     }
